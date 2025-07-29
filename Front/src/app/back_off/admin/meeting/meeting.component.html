@@ -1,0 +1,79 @@
+<app-navadmin></app-navadmin>
+<main class="main-content">
+<div class="container mt-5">
+  <h2>Meeting Management</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Join Meeting Section -->
+  <div class="mb-3">
+    <label for="joinMeetingId" class="form-label">Join a Meeting</label>
+    <div class="input-group w-50">
+      <input
+        type="text"
+        class="form-control"
+        id="joinMeetingId"
+        [(ngModel)]="joinMeetingId"
+        placeholder="Enter Meeting ID"
+        [disabled]="isLoading || isMeetingActive"
+      />
+      <button
+        class="btn btn-success"
+        (click)="joinMeeting()"
+        [disabled]="isLoading || !joinMeetingId.trim() || isMeetingActive"
+      >
+        Join Meet
+      </button>
+    </div>
+  </div>
+
+  <!-- Start Meeting Section -->
+  <div class="mb-3">
+    <label class="form-label">Start a Meeting</label>
+    <div class="card p-3">
+      <div class="form-check" *ngFor="let user of users">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [id]="'user-' + user.id"
+          [checked]="selectedUserIds.includes(user.id)"
+          (change)="toggleUserSelection(user.id)"
+          [disabled]="isLoading || isMeetingActive"
+        />
+        <label class="form-check-label" [for]="'user-' + user.id">
+          {{ user.username }} ({{ user.email }})
+        </label>
+      </div>
+      <button
+        class="btn btn-info mt-2"
+        (click)="startMeeting()"
+        [disabled]="isLoading || selectedUserIds.length === 0 || isMeetingActive"
+      >
+        Start Meeting with Selected Users
+      </button>
+      <button
+        class="btn btn-danger mt-2"
+        (click)="stopMeeting()"
+        [disabled]="!isMeetingActive"
+        *ngIf="isMeetingActive"
+      >
+        Stop Meeting
+      </button>
+    </div>
+  </div>
+
+  <!-- Meeting Container -->
+  <div class="mb-3" [ngClass]="{'d-none': !isMeetingActive}">
+    <h3>Meeting Room</h3>
+    <div #meetingContainer id="meetingContainer" style="width: 100%; height: 500px; border: 1px solid #ccc;"></div>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>
+</main>

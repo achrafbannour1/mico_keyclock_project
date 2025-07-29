@@ -1,0 +1,234 @@
+
+/* Global Container for Post Detail */
+.post-detail-container {
+  margin-left: 300px; /* Adjust the margin to create space from the sidebar */
+  padding: 20px;
+  max-width: 80%;
+  margin-top: 20px;
+}
+
+/* Post main card */
+.post-card {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.post-card:hover {
+  transform: scale(1.02);
+}
+
+/* Avatar for the post */
+.profile-picture,
+.comment-avatar {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+/* Post Image */
+.post-img {
+  width: 80%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Content of the post */
+.post-content {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+  text-align: justify;
+}
+
+/* Tags */
+.tag-chip {
+  background: #007acc;
+  color: white;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+/* Comment Section */
+.comment-section {
+  margin-top: 20px;
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comment-section h3 {
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  position: fixed;
+  background: #ff6409;
+  color: white;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.company-logo {
+  margin-bottom: 40px;
+  padding: 0 15px;
+}
+
+.logo-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav li a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  margin: 8px 0;
+  transition: all 0.3s ease;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li.active a {
+  background: #3498db;
+  transform: translateX(10px);
+}
+
+.sidebar-nav i {
+  width: 25px;
+  text-align: center;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.contact-block {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.contact-block i {
+  font-size: 1.2rem;
+}
+
+.inquire-btn {
+  width: 100%;
+  padding: 15px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.inquire-btn:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+.back-button {
+  background-color: #d35400; /* Orange foncé */
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.back-button:hover {
+  background-color: #b54300; /* Une teinte plus foncée au survol */
+}
+app-navadmin {
+  width: 250px; /* Ajuste la largeur de la sidebar */
+  height: 100vh; /* Assure que la navbar prend toute la hauteur */
+  position: fixed; /* Fixe la navbar à gauche */
+  top: 0;
+  left: 0;
+}
+
+/* Carte de sentiment */
+.sentiment-card {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  margin-top: 10px;
+}
+
+.sentiment-card:hover {
+  transform: scale(1.05);
+}
+
+/* Icône de sentiment */
+.sentiment-icon {
+  font-size: 28px;
+  margin-right: 15px;
+}
+
+/* Label de sentiment */
+.sentiment-label {
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+/* Couleurs des cartes */
+.positive-card {
+  background: rgba(46, 204, 113, 0.2);
+  border-left: 5px solid #2ecc71;
+}
+
+.negative-card {
+  background: rgba(231, 76, 60, 0.2);
+  border-left: 5px solid #e74c3c;
+}
+
+.neutral-card {
+  background: rgba(189, 195, 199, 0.2);
+  border-left: 5px solid #7f8c8d;
+}
+
+/* Barre de progression */
+mat-progress-bar {
+  margin-top: 5px;
+  height: 5px;
+  border-radius: 5px;
+}
+
+

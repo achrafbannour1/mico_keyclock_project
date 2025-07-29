@@ -1,0 +1,55 @@
+<app-nav-manager></app-nav-manager>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">All Affectations</h2>
+
+  <!-- Add Search Bar -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="input-group">
+        <span class="input-group-text"><i class="fa fa-search"></i></span>
+        <input type="text" class="form-control" placeholder="Search by project or resource brand..."
+               [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()">
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive shadow-lg rounded bg-white p-3">
+    <table class="table table-hover table-bordered">
+      <thead class="bg-primary text-white">
+      <tr>
+
+        <th>Project Name</th>
+        <th>Resource Brand</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Work Hours</th>
+        <th>Quantity</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let affectation of filteredAffectations" class="align-middle">
+
+        <td>{{ affectation.projectName }}</td>
+        <td>{{ affectation.resourceBrand }}</td>
+        <td>{{ affectation.startDate | date:'yyyy-MM-dd' }}</td>
+        <td>{{ affectation.endDate | date:'yyyy-MM-dd' }}</td>
+        <td>{{ affectation.workHours }}</td>
+        <td>
+          <input type="number" class="form-control form-control-sm d-inline-block w-auto"
+                 [(ngModel)]="affectation.quantity" min="1" (change)="onQuantityChange(affectation)">
+        </td>
+        <td>
+          <button class="btn btn-warning btn-sm mr-2" (click)="updateQuantity(affectation)">
+            Update Quantity
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="deleteAffectation(affectation.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+.edit-post-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .full-width {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  app-navcl {
+    display: block;
+    margin-bottom: 40px; /* Ajuste l'espacement sous la navbar */
+}
+
+  

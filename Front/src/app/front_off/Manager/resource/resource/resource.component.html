@@ -1,0 +1,111 @@
+<app-nav-manager></app-nav-manager>
+<div class="container-xxl py-5">
+  <div class="container">
+    <div class="row g-0 gx-5 align-items-end">
+      <div class="col-lg-6">
+        <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+          <h1 class="mb-3 display-5 fw-bold text-primary">Resource Inventory</h1>
+        </div>
+      </div>
+      <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+        <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+          <li class="nav-item me-2">
+            <button class="btn filter-btn"
+                    [class.active]="isActiveType(Rtype.MACHINE)"
+                    (click)="filterByType(Rtype.MACHINE)">
+              <i class="fa fa-cogs me-2"></i>Mechanics
+            </button>
+          </li>
+          <li class="nav-item me-2">
+            <button class="btn filter-btn"
+                    [class.active]="isActiveType(Rtype.TOOL)"
+                    (click)="filterByType(Rtype.TOOL)">
+              <i class="fa fa-wrench me-2"></i>Tools
+            </button>
+          </li>
+          <li class="nav-item me-0">
+            <button class="btn filter-btn"
+                    [class.active]="isActiveType(Rtype.MATERIALS)"
+                    (click)="filterByType(Rtype.MATERIALS)">
+              <i class="fa fa-cubes me-2"></i>Materials
+            </button>
+          </li>
+          <!-- Add Chatbot Toggle Button -->
+          <li class="nav-item me-0">
+            <button class="btn btn-primary" (click)="toggleChatbot()">
+              <i class="fa fa-comments me-2"></i>
+              {{ showChatbot ? 'Hide Chatbot' : 'Show Chatbot' }}
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content">
+      <div id="tab-1" class="tab-pane fade show p-0 active">
+        <div class="row g-4">
+          <div *ngFor="let resource of filteredResources" class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="resource-card">
+              <div class="image-container position-relative">
+                <img class="img-fluid" src="{{resourceService.getBrandImage(resource.brande)}}" alt="{{ resource.brande }}">
+                <div class="status-badge" [ngClass]="{'bg-success': resource.status, 'bg-danger': !resource.status}">
+                  {{ resource.status ? 'Available' : 'Not Available' }}
+                </div>
+              </div>
+
+              <div class="resource-content p-4">
+                <div class="d-flex align-items-center mb-3">
+                  <img src="assets/images/brand.png" alt="Brand Logo" class="brand-logo">
+                  <h5 class="mb-0">{{ resource.brande }}</h5>
+                </div>
+                <div *ngIf="resource.rtype === Rtype.MACHINE">
+                  <p class="plate-number text-muted">
+                    <i class="fa fa-hashtag me-1"></i> {{ resource.plateNumber }}
+                  </p>
+                  <p class="work-hours text-muted">
+                    <i class="fa fa-clock-o me-1"></i> {{ resource.nbWorkHours }} hours
+                  </p>
+                </div>
+
+                <div *ngIf="resource.rtype === Rtype.TOOL || resource.rtype === Rtype.MATERIALS">
+                  <p class="quantity text-muted">
+                    <i class="fa fa-cubes me-1"></i> Quantity: {{ resource.quantity }}
+                  </p>
+                </div>
+
+                <div class="text-center mt-3">
+                  <a class="btn btn-details" [routerLink]="['/Manager/resourceDetails', resource.id]">
+                    <i class="fa fa-info-circle me-2"></i>View Details
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chatbot Iframe with Conditional Visibility -->
+          <div *ngIf="showChatbot" class="col-12 wow fadeInUp" data-wow-delay="0.1s">
+            <iframe
+              src="https://www.chatbase.co/chatbot-iframe/fspvk8_szhng-7F_1OkvC"
+              width="100%"
+              style="height: 100%; min-height: 700px"
+              frameborder="0"
+            ></iframe>
+          </div>
+
+          <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+            <a class="btn btn-primary btn-lg px-5 py-3 rounded-pill" href="#">
+              Load More Resources
+              <i class="fa fa-arrow-right ms-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 text-center mt-5">
+      <a class="btn btn-success btn-lg px-5 py-3 rounded-pill" [routerLink]="['/Manager/affectations']">
+        Go to Affectations
+        <i class="fa fa-arrow-right ms-2"></i>
+      </a>
+    </div>
+  </div>
+</div>

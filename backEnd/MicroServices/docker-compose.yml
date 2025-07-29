@@ -1,0 +1,252 @@
+version: '3.8'
+
+services:
+  # Config Server
+  configserver:
+    build: ./configserver
+    image: backend-configserver:latest
+    container_name: configserver
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/aminejmili10/MicroserviceProject.git
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_SEARCH_PATHS=config
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT_LABEL=main
+    networks:
+      - microservices-network
+
+  # Eureka Server
+  eureka:
+    build: ./eureka
+    image: backend-eureka:latest
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-network
+
+  # API Gateway
+  gateway:
+    build: ./getway
+    image: backend-gateway:latest
+    container_name: gateway-service
+    ports:
+      - "8030:8030"
+    depends_on:
+      - eureka
+      - configserver
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://configserver:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+    networks:
+      - microservices-network
+
+  # Blogs Service
+  blogs:
+    build: ./MicroServices/Blogs
+    image: backend-blogs:latest
+    container_name: blogs-service
+    ports:
+      - "8090:8090"
+    depends_on:
+      - eureka
+      - configserver
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://configserver:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+    networks:
+      - microservices-network
+
+  # UserGestion Service
+  usergestion:
+    build: ./MicroServices/UserGestion
+    image: backend-usergestion:latest
+    container_name: usergestion-service
+    ports:
+      - "8089:8089"
+    depends_on:
+      - eureka
+      - configserver
+      - usergestion-db
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://configserver:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://usergestion-db:3306/springdb?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    networks:
+      - microservices-network
+
+  # ProductGestion Service
+  productgestion:
+    build: ./MicroServices/ProductGestion
+    image: backend-productgestion:latest
+    container_name: productgestion-service
+    ports:
+      - "8086:8086"
+    depends_on:
+      - eureka
+      - configserver
+      - productgestion-db
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://configserver:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://productgestion-db:3306/ProductGestion?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    networks:
+      - microservices-network
+
+  # CommandeGestion Service
+  commandegestion:
+    build: ./MicroServices/commandeGestion
+    image: backend-commandegestion:latest
+    container_name: commandegestion-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka
+      - configserver
+      - commandegestion-db
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://configserver:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://commandegestion-db:3306/commandeGestion?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    networks:
+      - microservices-network
+
+  # Livraison Service
+  livraison:
+    build: ./MicroServices/Livraison
+    image: backend-livraison:latest
+    container_name: livraison-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      - eureka
+      - configserver
+      - livraison-db
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://configserver:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://livraison-db:3306/LivraisonGestion?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    networks:
+      - microservices-network
+
+  # Paiment Service
+  paiment:
+    build: ./MicroServices/Paiment
+    image: backend-paiment:latest
+    container_name: paiment-service
+    ports:
+      - "8085:8085"
+    depends_on:
+      - eureka
+      - configserver
+      - paiment-db
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://configserver:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://paiment-db:3306/PaimentGestion?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    networks:
+      - microservices-network
+
+  # DemandeGestion Service
+  demandegestion:
+    build: ./MicroServices/demandeGestion
+    image: backend-demandegestion:latest
+    container_name: demandegestion-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - eureka
+      - configserver
+      - demandegestion-db
+    environment:
+      - SPRING_CLOUD_CONFIG_URI=http://configserver:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://demandegestion-db:3306/demandeGestion?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    networks:
+      - microservices-network
+
+  # MySQL Databases
+  usergestion-db:
+    image: mysql:8.0
+    container_name: usergestion-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=springdb
+    ports:
+      - "3307:3306"
+    networks:
+      - microservices-network
+
+  productgestion-db:
+    image: mysql:8.0
+    container_name: productgestion-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=ProductGestion
+    ports:
+      - "3308:3306"
+    networks:
+      - microservices-network
+
+  commandegestion-db:
+    image: mysql:8.0
+    container_name: commandegestion-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=commandeGestion
+    ports:
+      - "3309:3306"
+    networks:
+      - microservices-network
+
+  livraison-db:
+    image: mysql:8.0
+    container_name: livraison-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=LivraisonGestion
+    ports:
+      - "3310:3306"
+    networks:
+      - microservices-network
+
+  paiment-db:
+    image: mysql:8.0
+    container_name: paiment-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=PaimentGestion
+    ports:
+      - "3311:3306"
+    networks:
+      - microservices-network
+
+  demandegestion-db:
+    image: mysql:8.0
+    container_name: demandegestion-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=demandeGestion
+    ports:
+      - "3312:3306"
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge

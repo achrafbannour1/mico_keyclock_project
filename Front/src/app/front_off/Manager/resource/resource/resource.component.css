@@ -1,0 +1,101 @@
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #4f46e5;
+  --accent-color: #ff6b35;
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+  --hover-elevation: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Added shadow variable */
+}
+
+/* Fix Icons - Add Font Awesome CSS in your index.html */
+.resource-card {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid var(--primary-color);
+  transition: all 0.3s ease;
+  box-shadow: var(--hover-elevation);
+  overflow: hidden;
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
+}
+.status-badge {
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  background: var(--primary-color); /* Solid background */
+  color: white !important;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 1 !important; /* Ensure full opacity */
+}
+
+.btn-details {
+  background: var(--primary-color);
+  color: #ff6409 !important; /* Force white text */
+  border:1px #ff6409 !important ;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-details:hover {
+  background: green;
+  color: white !important;
+}
+.brand-logo {
+  width: 60px; /* Adjust based on your image size */
+  height: auto;
+  object-fit: contain;
+  padding-right: 1rem;
+}
+.form-check{
+  padding-left: 50%;
+}
+.resource-form {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.resource-form h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.resource-form label {
+  display: block;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.resource-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.resource-form button {
+  width: 100%;
+  padding: 10px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.resource-form button:hover {
+  background: #2980b9;
+}
+.d-none {
+  display: none !important;
+}

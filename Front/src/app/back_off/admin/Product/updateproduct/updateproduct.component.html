@@ -1,0 +1,165 @@
+<app-navadmin></app-navadmin>
+<main class="main-content">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Update Product</h4>
+          </div>
+          <div class="card-body">
+            <form #productForm="ngForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="designation" class="form-label">Designation</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="designation"
+                  name="designation"
+                  [(ngModel)]="product.designation"
+                  required
+                  minlength="3"
+                  #designation="ngModel"
+                />
+                <div *ngIf="designation.invalid && (designation.dirty || designation.touched)" class="text-danger">
+                  <small *ngIf="designation.errors?.['required']">Designation is required.</small>
+                  <small *ngIf="designation.errors?.['minlength']">Designation must be at least 3 characters.</small>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="prix" class="form-label">Price ($)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="prix"
+                  name="prix"
+                  [(ngModel)]="product.prix"
+                  required
+                  min="0"
+                  step="0.01"
+                  #prix="ngModel"
+                />
+                <div *ngIf="prix.invalid && (prix.dirty || prix.touched)" class="text-danger">
+                  <small *ngIf="prix.errors?.['required']">Price is required.</small>
+                  <small *ngIf="prix.errors?.['min']">Price cannot be negative.</small>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="category"
+                  name="category"
+                  [(ngModel)]="product.category"
+                  required
+                  minlength="3"
+                  #category="ngModel"
+                />
+                <div *ngIf="category.invalid && (category.dirty || category.touched)" class="text-danger">
+                  <small *ngIf="category.errors?.['required']">Category is required.</small>
+                  <small *ngIf="category.errors?.['minlength']">Category must be at least 3 characters.</small>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="marque" class="form-label">Brand</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="marque"
+                  name="marque"
+                  [(ngModel)]="product.marque"
+                  required
+                  minlength="2"
+                  #marque="ngModel"
+                />
+                <div *ngIf="marque.invalid && (marque.dirty || marque.touched)" class="text-danger">
+                  <small *ngIf="marque.errors?.['required']">Brand is required.</small>
+                  <small *ngIf="marque.errors?.['minlength']">Brand must be at least 2 characters.</small>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="discount" class="form-label">Discount (%)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="discount"
+                  name="discount"
+                  [(ngModel)]="product.discount"
+                  min="0"
+                  #discount="ngModel"
+                />
+                <div *ngIf="discount.invalid && (discount.dirty || discount.touched)" class="text-danger">
+                  <small *ngIf="discount.errors?.['min']">Discount cannot be negative.</small>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="tauxRemise" class="form-label">Discount Rate (e.g., 0.15 for 15%)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="tauxRemise"
+                  name="tauxRemise"
+                  [(ngModel)]="product.tauxRemise"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  #tauxRemise="ngModel"
+                />
+                <div *ngIf="tauxRemise.invalid && (tauxRemise.dirty || tauxRemise.touched)" class="text-danger">
+                  <small *ngIf="tauxRemise.errors?.['min']">Discount rate cannot be negative.</small>
+                  <small *ngIf="tauxRemise.errors?.['max']">Discount rate cannot exceed 1.</small>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="image" class="form-label">Image URL</label>
+                <input
+                  type="url"
+                  class="form-control"
+                  id="image"
+                  name="image"
+                  [(ngModel)]="product.image"
+                  #image="ngModel"
+                />
+                <div *ngIf="image.invalid && (image.dirty || image.touched)" class="text-danger">
+                  <small *ngIf="image.errors?.['url']">Please enter a valid URL.</small>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="article" class="form-label">Article</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="article"
+                  name="article"
+                  [(ngModel)]="product.article"
+                  #article="ngModel"
+                />
+              </div>
+
+              <div *ngIf="errorMessage" class="alert alert-danger">
+                {{ errorMessage }}
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">
+                  Update Product
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="cancel()">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

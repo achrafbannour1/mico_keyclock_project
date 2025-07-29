@@ -1,0 +1,218 @@
+.main-content {
+    margin-left: 280px;
+    padding: 40px;
+    min-height: 100vh;
+    background: #f8f9fa;
+  }
+  
+  .admin-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+ /* Style amélioré pour la barre de recherche */
+.search-input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 2px solid #ff000089;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-input:focus {
+    border-color: #b30000b6;
+    box-shadow: 0 4px 8px rgba(0, 91, 187, 0.2);
+  }
+  
+  /* Ajout d'un effet de survol */
+  .search-input:hover {
+    border-color: #bf0000;
+  }
+  
+  
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin-table th, .admin-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .admin-table th {
+    background: #ff6409;
+    color: white;
+  }
+  
+ 
+  
+  .button-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .view-button, .delete-button {
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .view-button {
+    background-color: #8c2004;
+  }
+  
+  .view-button:hover {
+    background-color: #ff3c00;
+  }
+  
+  .delete-button {
+    background-color: #ff4d4d;
+  }
+  
+  .delete-button:hover {
+    background-color: #f6620db6;
+  }
+  
+  .stat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff0000;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .stat-button:hover {
+    background-color: #e00707;
+  }
+
+  .snackbar-notification {
+    background-color: #ff3c00;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+  .notification-container {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ff3c00, #ff6409);
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(255, 60, 0, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .notification-container:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(255, 60, 0, 0.4);
+  }
+  
+  .notification-icon {
+    font-size: 26px;
+    color: white;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Effet de pulsation pour une nouvelle notification */
+  .new-notification {
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 4px 10px rgba(255, 60, 0, 0.3);
+    }
+    50% {
+      transform: scale(1.2);
+      box-shadow: 0 6px 15px rgba(255, 60, 0, 0.5);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 4px 10px rgba(255, 60, 0, 0.3);
+    }
+  }
+  
+  /* Pastille de notification moderne */
+  .notification-badge {
+    background: white;
+    color: #ee0c00;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .toast-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff7e4f, #ffbc80); /* Couleur orangée claire */
+    color: #ffffff;
+    padding: 16px 22px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(255, 100, 0, 0.6); /* Ombre douce */
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: fadeInOut 4s ease-in-out forwards;
+    z-index: 9999;
+  }
+  
+  .toast-popup::before {
+    content: '💬';
+    font-size: 18px;
+    animation: pop 0.5s ease;
+  }
+  
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(30px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(30px); }
+  }
+  
+  @keyframes pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  
+  

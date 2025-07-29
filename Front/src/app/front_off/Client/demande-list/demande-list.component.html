@@ -1,0 +1,65 @@
+<app-navcl></app-navcl>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let demande of demandes">
+      <div class="card shadow rounded-4 border-0">
+        <div class="card-body">
+          <h5 class="card-title">Demande #{{ demande.id }}</h5>
+          <p class="card-text">
+            <strong>Type :</strong> {{ demande.typeDemande }}<br>
+            <strong>Description :</strong> {{ demande.description }}<br>
+            <strong>Date de demande :</strong> {{ demande.date_demande | date }}<br>
+            <strong>Date de traitement :</strong> 
+            {{ demande.date_traitement ? (demande.date_traitement | date) : 'Non traitée' }}
+          </p>
+          <div class="d-flex justify-content-between">
+            <button *ngIf="demande.id" class="btn btn-warning" type="button" (click)="openModal(demande)">
+              Modifier
+            </button>
+            <button *ngIf="demande.id" class="btn btn-danger" type="button" (click)="deleteDemande(demande.id)">
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="demandeModal" tabindex="-1" aria-labelledby="demandeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" *ngIf="selectedDemande">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="demandeModalLabel">Modifier la demande</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulaire de modification -->
+        <form (ngSubmit)="updateDemande()">
+          <div class="mb-3">
+            <label for="typeDemande" class="form-label">Type de demande</label>
+            <select id="typeDemande" [(ngModel)]="selectedDemande.typeDemande" name="typeDemande" class="form-select" required>
+              <option value="TECHNIQUE">Technique</option>
+              <option value="ADMINISTRATIVE">Administrative</option>
+              <option value="AUTRE">Autre</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" [(ngModel)]="selectedDemande.description" name="description" class="form-control" rows="3" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="date_demande" class="form-label">Date de demande</label>
+            <input id="date_demande" [(ngModel)]="selectedDemande.date_demande" name="date_demande" type="date" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="date_traitement" class="form-label">Date de traitement</label>
+            <input id="date_traitement" [(ngModel)]="selectedDemande.date_traitement" name="date_traitement" type="date" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary">Sauvegarder</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

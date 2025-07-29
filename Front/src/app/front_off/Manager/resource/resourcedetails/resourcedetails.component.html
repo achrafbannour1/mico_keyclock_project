@@ -1,0 +1,40 @@
+<app-nav-manager></app-nav-manager>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div *ngIf="resource" class="card shadow-lg p-4 text-center" style="max-width: 500px; width: 100%;">
+    <img
+      [src]="resourceService.getBrandImage(resource.brande)"
+      alt="Resource Image"
+      class="img-fluid rounded mb-3"
+      style="max-height: 200px; object-fit: cover;"
+    />
+    <div class="card-body">
+      <h2 class="text-primary fw-bold">{{ resource.brande }}</h2>
+      <hr>
+      <p *ngIf="resource.rtype === 'MACHINE'"><strong>Plate Number:</strong> {{ resource.plateNumber }}</p>
+      <p><strong>Type:</strong> {{ resource.rtype }}</p>
+      <p><strong>Price:</strong> {{ resource.price | currency }}</p>
+      <p *ngIf="resource.rtype !== 'MACHINE'"><strong>Quantity:</strong> {{ resource.quantity }}</p>
+      <p *ngIf="resource.rtype === 'MACHINE'"><strong>Months Pay:</strong> {{ resource.monthsPay }}</p>
+      <p *ngIf="resource.rtype === 'MACHINE'"><strong>Work Hours:</strong> {{ resource.nbWorkHours }}</p>
+
+      <p>
+        <strong>Status:</strong>
+        <span [ngClass]="{ 'text-success fw-bold': resource.status, 'text-danger fw-bold': !resource.status }">
+            {{ resource.status ? 'Available' : 'Not Available' }}
+          </span>
+      </p>
+      <a *ngIf="resource.rtype === 'MACHINE'" class="btn btn-primary mt-3 me-2" [routerLink]="['/Manager/equipmentDetails', resource.id]">
+        <i class="fa fa-wrench me-2"></i> Maintain
+      </a>
+      <a class="btn btn-success mt-3"
+         [routerLink]="['/Manager', resource.rtype === 'MACHINE' ? 'affectResource' : 'affectToolMaterial', resource.id]">
+        <i class="fa fa-link me-2"></i> Affect to Project
+      </a>
+
+      <a class="btn btn-secondary mt-3" routerLink="/Manager/resource">
+        <i class="fa fa-arrow-left me-2"></i>Back to Resources
+      </a>
+    </div>
+  </div>
+</div>
+

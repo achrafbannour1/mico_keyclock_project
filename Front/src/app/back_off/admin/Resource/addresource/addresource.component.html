@@ -1,0 +1,86 @@
+<app-navadmin></app-navadmin>
+
+<main class="main-content">
+  <div class="button-container">
+    <button (click)="showForm('machine')" class="btn">Add Machine</button>
+    <button (click)="showForm('tool')" class="btn">Add Tool/Material</button>
+  </div>
+
+  <!-- Machine Form -->
+  <div *ngIf="selectedForm === 'machine'" class="form-container">
+    <h2 class="form-title">Add Machine</h2>
+    <form [formGroup]="machineForm" (ngSubmit)="onSubmitMachine()">
+
+      <div class="form-group">
+        <input type="text" id="plateNumber" formControlName="plateNumber" class="form-control">
+        <label for="plateNumber">Plate Number</label>
+        <span class="error-message" *ngIf="isInvalid(machineForm, 'plateNumber')">Plate number is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="brand">Brand</label>
+        <select id="brand" formControlName="brande" class="form-control">
+          <option *ngFor="let brand of machineBrands" [value]="brand">{{ brand }}</option>
+        </select>
+        <span class="error-message" *ngIf="isInvalid(machineForm, 'brande')">Brand is required.</span>
+      </div>
+
+      <div class="form-group">
+        <input type="number" id="price" formControlName="price" class="form-control">
+        <label for="price">Price</label>
+        <span class="error-message" *ngIf="isInvalid(machineForm, 'price')">Price must be greater than 0.</span>
+      </div>
+
+      <div class="form-group">
+        <input type="number" id="nbWorkHours" formControlName="nbWorkHours" class="form-control">
+        <label for="nbWorkHours">Work Hours</label>
+        <span class="error-message" *ngIf="isInvalid(machineForm, 'nbWorkHours')">Work hours must be greater than 0.</span>
+      </div>
+
+      <div class="form-group">
+        <input type="number" id="monthsPay" formControlName="monthsPay" class="form-control">
+        <label for="monthsPay">Monthly Pay</label>
+        <span class="error-message" *ngIf="isInvalid(machineForm, 'monthsPay')">Monthly pay must be greater than 0.</span>
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="!machineForm.valid">Add Machine</button>
+    </form>
+  </div>
+
+  <!-- Tool/Material Form -->
+  <div *ngIf="selectedForm === 'tool'" class="form-container">
+    <h2 class="form-title">Add Tool/Material</h2>
+    <form [formGroup]="toolForm" (ngSubmit)="onSubmitTool()">
+
+      <div class="form-group">
+        <label for="type">Select Type</label>
+        <select id="type" formControlName="type" class="form-control">
+          <option value="TOOL">Tool</option>
+          <option value="MATERIALS">Materials</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="brandTool">Brand</label>
+        <select id="brandTool" formControlName="brande" class="form-control">
+          <option *ngFor="let brand of (toolForm.value.type === 'TOOL' ? toolBrands : materialBrands)" [value]="brand">{{ brand }}</option>
+        </select>
+        <span class="error-message" *ngIf="isInvalid(toolForm, 'brande')">Brand is required.</span>
+      </div>
+
+      <div class="form-group">
+        <input type="number" id="priceTool" formControlName="price" class="form-control">
+        <label for="priceTool">Price</label>
+        <span class="error-message" *ngIf="isInvalid(toolForm, 'price')">Price must be greater than 0.</span>
+      </div>
+
+      <div class="form-group">
+        <input type="number" id="quantity" formControlName="quantity" class="form-control">
+        <label for="quantity">Quantity</label>
+        <span class="error-message" *ngIf="isInvalid(toolForm, 'quantity')">Quantity must be greater than 0.</span>
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="!toolForm.valid">Add Tool/Material</button>
+    </form>
+  </div>
+</main>

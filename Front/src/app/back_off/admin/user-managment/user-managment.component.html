@@ -1,0 +1,141 @@
+<app-navadmin></app-navadmin>
+<main class="main-content">
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center mb-4 animate__animated animate__fadeIn">User Management</h2>
+
+        <div *ngIf="errorMessage" class="alert alert-danger animate__animated animate__shakeX">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Create User Form -->
+        <div class="card shadow-sm mb-4 animate__animated animate__fadeInUp">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #ff6409;">Create New User</h5>
+            <form (ngSubmit)="createUser()">
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    [(ngModel)]="newUser.username"
+                    name="username"
+                    required
+                  />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    [(ngModel)]="newUser.email"
+                    name="email"
+                    required
+                  />
+                </div>
+                <div class="col-md-2 mb-3">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="firstName"
+                    [(ngModel)]="newUser.firstName"
+                    name="firstName"
+                  />
+                </div>
+                <div class="col-md-2 mb-3">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lastName"
+                    [(ngModel)]="newUser.lastName"
+                    name="lastName"
+                  />
+                </div>
+                <div class="col-md-2 mb-3">
+                  <label for="role" class="form-label">Role</label>
+                  <select
+                    class="form-select"
+                    id="role"
+                    [(ngModel)]="newUser.realmRoles![0]"
+                    name="role"
+                    required
+                  >
+                    <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-custom-orange btn-lg" [disabled]="isLoading">
+                  Create User
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="mb-4 text-center animate__animated animate__fadeInUp">
+          <a routerLink="/admin/meeting" class="btn btn-custom-blue btn-lg">Go to Meeting Management</a>
+        </div>
+
+        <div *ngIf="isLoading" class="text-center animate__animated animate__pulse">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
+        <div *ngIf="!isLoading && users.length > 0" class="card shadow-sm animate__animated animate__fadeInUp">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover mb-0">
+                <thead style="background: #ff6409; color: white;">
+                <tr>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Banned</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let user of users" class="animate__animated animate__fadeIn" [ngClass]="{'table-warning': !user.enabled}">
+                  <td>{{ user.username }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.firstName || '-' }}</td>
+                  <td>{{ user.lastName || '-' }}</td>
+                  <td>
+                      <span class="badge" [ngClass]="{'bg-success': user.enabled, 'bg-danger': !user.enabled}">
+                        {{ user.enabled ? 'No' : 'Yes' }}
+                      </span>
+                  </td>
+                  <td>
+                    <button class="btn btn-danger btn-sm me-2" (click)="deleteUser(user.id)">Delete</button>
+                    <button
+                      class="btn btn-sm me-2"
+                      [ngClass]="{'btn-custom-orange': user.enabled, 'btn-success': !user.enabled}"
+                      (click)="banUser(user.id, !user.enabled)"
+                    >
+                      {{ user.enabled ? 'Ban' : 'Unban' }}
+                    </button>
+                    <a class="btn btn-custom-blue btn-sm me-2" [routerLink]="['/admin/user-roles', user.id]">Manage Roles</a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!isLoading && users.length === 0" class="text-center mt-4 animate__animated animate__fadeIn">
+          <p class="text-muted">No users found.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

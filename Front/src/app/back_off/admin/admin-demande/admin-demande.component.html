@@ -1,0 +1,33 @@
+<app-navadmin></app-navadmin>
+
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Statistiques des Demandes</h2>
+  <div class="card p-3 mb-5 shadow">
+    <canvas id="demandeChart" height="100"></canvas>
+  </div>
+
+  <h2 class="text-center mb-3">Liste des demandes (Admin)</h2>
+  <div class="table-responsive shadow-sm">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark text-center">
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Date de demande</th>
+          <th>Date de traitement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let demande of demandes">
+          <td>{{ demande.id }}</td>
+          <td>{{ demande.typeDemande }}</td>
+          <td>{{ demande.description }}</td>
+          <td>{{ demande.date_demande | date: 'shortDate' }}</td>
+          <td>{{ demande.date_traitement ? (demande.date_traitement | date: 'shortDate') : '—' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+    

@@ -1,0 +1,153 @@
+<app-navcl></app-navcl>
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-7 text-center heading-section">
+        <h2 class="mb-4">Our Products</h2>
+        <p>Discover our range of high-quality products tailored for you.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngIf="errorMessage" class="col-12 alert alert-danger text-center">
+        {{ errorMessage }}
+      </div>
+      <div *ngFor="let product of filteredProducts" class="col-md-4 col-lg-3 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" [src]="getProductImage(product.image)" [alt]="product.designation" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.designation }}</h5>
+            <p class="card-text">
+              <strong>Brand:</strong> {{ product.marque }}<br>
+              <strong>Category:</strong> {{ product.category }}<br>
+              <strong>Price:</strong> {{ product.prix | currency }}<br>
+              <strong>Discount:</strong> {{ product.discount }}% ({{ product.tauxRemise * 100 }}% off)
+            </p>
+          </div>
+          <div class="card-footer text-center">
+            <a class="btn btn-primary btn-sm" [routerLink]="['/client/product-details', product.id]">
+              View Details
+            </a>
+            <button
+              class="btn btn-warning btn-sm mt-2"
+              (click)="addToCart(product.id!, 1, product.prix)">
+              <i class="fa fa-cart-plus me-1"></i> Ajouter au panier
+            </button>
+            <div class="mt-2">
+              <input type="checkbox" [checked]="isSelectedForComparison(product)"
+                     (change)="toggleComparison(product)"> Compare
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-7 text-center">
+        <ul class="nav nav-pills d-inline-flex justify-content-center mb-5">
+          <li class="nav-item me-2" *ngFor="let category of categories">
+            <button class="btn filter-btn"
+                    [class.active]="isActiveCategory(category)"
+                    (click)="filterByCategory(category)">
+              <i class="fa fa-tag me-2"></i>{{ category }}
+            </button>
+          </li>
+        </ul>
+        <button class="btn btn-success" (click)="toggleChatbot()">
+          {{ showChatbot ? 'Hide Chatbot' : 'Show Chatbot' }}
+        </button>
+      </div>
+    </div>
+    <!-- Comparison Section -->
+    <div *ngIf="showComparison" class="row mt-5">
+      <div class="col-12">
+        <h3>Compare Products</h3>
+        <!-- Attribute Selection -->
+        <div class="mb-3">
+          <label class="form-label">Select Attributes to Compare:</label>
+          <div class="d-flex flex-wrap">
+            <div *ngFor="let attr of availableAttributes" class="form-check me-3">
+              <input class="form-check-input" type="checkbox" [checked]="selectedAttributes.includes(attr.key)"
+                     (change)="toggleAttribute(attr.key)">
+              <label class="form-check-label">{{ attr.label }}</label>
+            </div>
+          </div>
+        </div>
+        <!-- Comparison Summary -->
+        <div class="alert alert-info" *ngIf="comparisonSummary.cheapest || comparisonSummary.bestDiscount">
+          <h5>Comparison Summary</h5>
+          <ul>
+            <li *ngIf="comparisonSummary.cheapest">
+              Cheapest Product: {{ comparisonSummary.cheapest.designation }} ({{ comparisonSummary.cheapest.prix | currency }})
+            </li>
+            <li *ngIf="comparisonSummary.bestDiscount ">
+              Best Discount: {{ comparisonSummary.bestDiscount.designation }} ({{ comparisonSummary.bestDiscount.discount }}%)
+            </li>
+          </ul>
+        </div>
+        <!-- Comparison Table -->
+        <div class="table-responsive">
+          <table class="table table-bordered comparison-table">
+            <thead>
+            <tr>
+              <th>Attribute</th>
+              <th *ngFor="let product of selectedForComparison">
+                {{ product.designation }}
+                <button class="btn btn-danger btn-sm float-end" (click)="removeFromComparison(product.id!)">Remove</button>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngIf="selectedAttributes.includes('image')">
+              <td>Image</td>
+              <td *ngFor="let product of selectedForComparison">
+                <img [src]="getProductImage(product.image)" [alt]="product.designation" style="max-width: 100px;">
+              </td>
+            </tr>
+            <tr *ngIf="selectedAttributes.includes('prix')">
+              <td>Price</td>
+              <td *ngFor="let product of selectedForComparison"
+                  [class.best-value]="isBestValue('prix', product.prix, product)">
+                {{ product.prix | currency }}
+              </td>
+            </tr>
+            <tr *ngIf="selectedAttributes.includes('marque')">
+              <td>Brand</td>
+              <td *ngFor="let product of selectedForComparison">{{ product.marque }}</td>
+            </tr>
+            <tr *ngIf="selectedAttributes.includes('category')">
+              <td>Category</td>
+              <td *ngFor="let product of selectedForComparison">{{ product.category }}</td>
+            </tr>
+            <tr *ngIf="selectedAttributes.includes('discount')">
+              <td>Discount</td>
+              <td *ngFor="let product of selectedForComparison"
+                  [class.best-value]="isBestValue('discount', product.discount, product)">
+                {{ product.discount }}%
+              </td>
+            </tr>
+            <tr *ngIf="selectedAttributes.includes('tauxRemise')">
+              <td>Remise</td>
+              <td *ngFor="let product of selectedForComparison"
+                  [class.best-value]="isBestValue('tauxRemise', product.tauxRemise, product)">
+                {{ product.tauxRemise * 100 }}%
+              </td>
+            </tr>
+            <tr *ngIf="selectedAttributes.includes('article')">
+              <td>Article</td>
+              <td *ngFor="let product of selectedForComparison">{{ product.article }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Chatbot Iframe Section -->
+    <div *ngIf="showChatbot" class="col-12 wow fadeInUp" data-wow-delay="0.1s">
+      <iframe
+        src="https://www.chatbase.co/chatbot-iframe/fspvk8_szhng-7F_1OkvC"
+        width="100%"
+        style="height: 100%; min-height: 700px"
+        frameborder="0"
+      ></iframe>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,119 @@
+.wheel-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wheel-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.wheel {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  position: relative;
+  transition: transform 3s ease-out;
+  border: 3px solid #000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.segment {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  /* Clip-path for a 45-degree slice (360 / 8 prizes) */
+  clip-path: polygon(50% 50%, 100% 0, 100% 70.71%); /* 70.71% = 100% * (1 - cos(45°/2)) */
+}
+
+.segment span {
+  position: absolute;
+  transform-origin: center;
+  width: 120px;
+  text-align: center;
+  font-size: 14px; /* Smaller font for more prizes */
+  font-weight: bold;
+  color: #333;
+}
+
+.wheel-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: #000;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.pointer {
+  position: absolute;
+  top: -20px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid #000;
+  z-index: 10;
+}
+
+.btn-spin {
+  background-color: #ff6200;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.btn-spin:hover {
+  background-color: #e55a00;
+}
+
+.btn-spin:disabled {
+  background-color: #ff6200;
+  opacity: 0.6;
+}
+
+.btn-reset {
+  background-color: #333;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.btn-reset:hover {
+  background-color: #444;
+}
+
+.btn-reset:disabled {
+  background-color: #333;
+  opacity: 0.6;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+  padding: 15px;
+  border-radius: 5px;
+}

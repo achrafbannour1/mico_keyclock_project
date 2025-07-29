@@ -1,0 +1,33 @@
+<app-nav-manager></app-nav-manager>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Affect Tool/Material to Project</h2>
+
+  <div class="card shadow-lg rounded p-4">
+    <div *ngIf="errorMessage" class="alert alert-danger text-center">{{ errorMessage }}</div>
+
+    <form [formGroup]="toolMaterialForm" (ngSubmit)="submitAffectation()">
+      <div class="mb-3">
+        <label for="projectId" class="form-label">Select Project</label>
+        <select id="projectId" class="form-control" formControlName="projectId">
+          <option value="" disabled>Select a project</option>
+          <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+        </select>
+        <div *ngIf="toolMaterialForm.controls['projectId'].touched && toolMaterialForm.controls['projectId'].invalid" class="text-danger">
+          Please select a project.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity (Available: {{ resource?.quantity }})</label>
+        <input type="number" id="quantity" class="form-control" formControlName="quantity">
+        <div *ngIf="toolMaterialForm.controls['quantity'].touched && toolMaterialForm.controls['quantity'].invalid" class="text-danger">
+          Quantity must be greater than 0.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="toolMaterialForm.invalid">
+        Assign to Project
+      </button>
+    </form>
+  </div>
+</div>

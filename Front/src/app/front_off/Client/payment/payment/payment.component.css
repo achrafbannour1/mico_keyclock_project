@@ -1,0 +1,200 @@
+main {
+  padding: 50px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.projects-section {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #2c3e50;
+  font-size: 1.8rem;
+  font-weight: 600;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  width: 40px;
+  height: 3px;
+  background: #007bff;
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+}
+
+.project-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+}
+
+.project-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1; /* Ensure overlay is below project-info */
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-info {
+  position: relative; /* Changed from absolute to relative for better stacking */
+  padding: 12px;
+  text-align: center;
+  background: #fff;
+  z-index: 2; /* Ensure project-info is above overlay */
+}
+
+.project-info h3 {
+  margin: 0 0 10px;
+  font-size: 1.3em;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.project-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-primary {
+  padding: 8px 15px;
+  background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #0056b3 0%, #003d80 100%);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  padding: 8px 15px;
+  background: linear-gradient(90deg, #6c757d 0%, #5a6268 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(90deg, #5a6268 0%, #495057 100%);
+  transform: translateY(-2px);
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.pagination-controls .ngx-pagination a,
+.pagination-controls .ngx-pagination button {
+  background-color: #ff6409 !important;
+  color: white !important;
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin: 0 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+}
+
+.pagination-controls .ngx-pagination a:hover,
+.pagination-controls .ngx-pagination button:hover {
+  background-color: #d95408 !important;
+}
+
+.pagination-controls .ngx-pagination .current {
+  background-color: #ff6409 !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 8px 12px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.search-container input {
+  width: 300px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease-in-out;
+  background-color: white;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-container input:hover {
+  border-color: #ff6409;
+}
+
+.search-container input:focus {
+  outline: none;
+  border-color: #ff6409;
+  box-shadow: 0px 0px 5px rgba(255, 100, 9, 0.5);
+}

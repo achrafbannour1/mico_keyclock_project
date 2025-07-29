@@ -1,0 +1,24 @@
+<app-navcl></app-navcl>
+<div class="container mt-4">
+  <h2>Historique des Paiements</h2>
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>ID Commande</th>
+      <th>Montant (DT)</th>
+      <th>Date de Paiement</th>
+      <th>Statut</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let payment of payments">
+      <td>{{ payment.id }}</td>
+      <td>{{ payment.orderId }}</td>
+      <td>{{ payment.amount }}</td>
+      <td>{{ payment.paymentDate }}</td>
+      <td>{{ payment.status }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

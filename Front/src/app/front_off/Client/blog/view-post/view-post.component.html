@@ -1,0 +1,32 @@
+<app-navcl></app-navcl>
+
+<div *ngIf="postData" class="card-container">
+  <mat-card class="post-card">
+    <mat-card-header>
+      <div mat-card-avatar class="profile-picture"></div>
+      <mat-card-title>{{ postData.name }}</mat-card-title>
+      <mat-card-subtitle>
+        Posté par: {{ postData.postedBy }} | {{ postData.date | date: 'medium' }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <img mat-card-image [src]="postData.img ? postData.img : 'assets/default-image.jpg'" class="post-img" alt="Image du post" />
+
+    <mat-card-content>
+      <p class="post-content">{{ postData.content }}</p>
+    </mat-card-content>
+
+    <mat-chip-set *ngIf="postData.tags?.length">
+      <mat-chip *ngFor="let tag of postData.tags" class="tag-chip">{{ tag }}</mat-chip>
+    </mat-chip-set>
+
+    <mat-card-actions>
+      <button mat-button color="warn" (click)="likePost()">
+        {{ postData.likeCount }} <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-button color="primary">
+        {{ postData.viewCount }} <mat-icon>remove_red_eye</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,16 @@
+<p>financial works!</p>
+<div *ngFor="let financial of financials">
+    <!-- bouton pour voir les devis -->
+    <button (click)="showQuotes(financial.project.id)">📄 Voir les devis</button>
+  
+    <!-- si ce projet est sélectionné -->
+    <div *ngIf="selectedProjectId === financial.project.id">
+      <h4>Devis liés au projet</h4>
+      <ul>
+        <li *ngFor="let q of quotes">
+          📄 {{ q.total_amount }} TND | {{ q.date }} | {{ q.serviceList }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  

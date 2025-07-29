@@ -1,0 +1,43 @@
+<app-navcl></app-navcl>
+<main>
+  <div class="container">
+    <section class="projects-section">
+      <h2>Projects</h2>
+      <div class="search-container">
+        <input
+          type="text"
+          placeholder="find a project..."
+          [(ngModel)]="searchQuery"
+        />
+      </div>
+      <div class="project-cards">
+        <div *ngFor="let project of getFilteredProjects() | paginate: { id: 'projectsPagination', itemsPerPage: 6, currentPage: page }"
+             class="project-card">
+          <img [src]="project.image" alt="{{ project.name }}" class="project-image" (error)="handleImageError($event)">
+          <div class="project-overlay"></div>
+          <div class="project-info">
+            <h3>{{ project.name }}</h3>
+            <div class="project-buttons">
+              <button class="btn btn-primary" (click)="navigateToProjectPayments(project.id)">View Payments</button>
+              <button class="btn btn-secondary" (click)="navigateToProjectResources(project.name)">View Resources</button>
+            </div>
+          </div>
+          <p style="display: none;">{{ project | json }}</p>
+        </div>
+      </div>
+
+      <pagination-controls
+        id="projectsPagination"
+        (pageChange)="changePage($event)"
+        previousLabel="« Previous"
+        nextLabel="Next »">
+      </pagination-controls>
+    </section>
+  </div>
+  <iframe
+    src="https://www.chatbase.co/chatbot-iframe/reoXWOa-fM-jjzGEBqK9Z"
+    width="100%"
+    style="height: 100%; min-height: 700px"
+    frameborder="0">
+  </iframe>
+</main>

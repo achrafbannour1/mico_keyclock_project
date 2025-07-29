@@ -1,0 +1,11 @@
+Model Information:
+* title:	JCB Backhoe loader
+* source:	https://sketchfab.com/3d-models/jcb-backhoe-loader-2a61c987f8b048f592e084b4eefc1dd1
+* author:	sarvesh12 (https://sketchfab.com/sarvesh903)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "JCB Backhoe loader" (https://sketchfab.com/3d-models/jcb-backhoe-loader-2a61c987f8b048f592e084b4eefc1dd1) by sarvesh12 (https://sketchfab.com/sarvesh903) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

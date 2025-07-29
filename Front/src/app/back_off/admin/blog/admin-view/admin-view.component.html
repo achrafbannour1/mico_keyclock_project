@@ -1,0 +1,43 @@
+<app-navadmin></app-navadmin>
+
+<main class="main-content">
+  <div class="admin-container">
+    <h1>Tableau de Bord de l'Admin</h1>
+    
+
+  
+
+    <!-- Barre de recherche -->
+    <input type="text" [(ngModel)]="searchTerm" (input)="filterPosts()" 
+      placeholder="Rechercher un post..." class="search-input">
+
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          
+          <th>Contenu</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of filteredPosts">
+          <td>{{ post.id }}</td>
+          
+          <td>{{ post.content }}</td>
+          <td>
+            <div class="button-container">
+              <button routerLink="/admin/post/{{ post.id }}" class="view-button">Voir Post</button>
+              <button (click)="deletePost(post.id)" class="delete-button">Supprimer</button>
+            </div>
+            <!-- Toast Notification -->
+<div *ngIf="showToast" class="toast-popup">
+  {{ toastMessage }}
+</div>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>

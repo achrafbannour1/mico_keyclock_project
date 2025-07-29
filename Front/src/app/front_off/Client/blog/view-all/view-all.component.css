@@ -1,0 +1,302 @@
+/* Conteneur global : Gère l'affichage des cartes en grille */
+.card-container {
+    display: flex; /* Utilisation de Flexbox pour l'alignement */
+    flex-wrap: wrap; /* Permet aux cartes de passer à la ligne si nécessaire */
+    justify-content: center; /* Centre les cartes horizontalement */
+    gap: 20px; /* Espacement entre les cartes */
+    padding: 30px; /* Ajout d'un padding autour du conteneur */
+    margin: 0 auto; /* Centre le conteneur sur la page */
+    max-width: 1200px; /* Définit une largeur maximale pour éviter un affichage trop large */
+}
+
+/* Barre de recherche */
+.search-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 40px;
+    margin-right: 500px;
+   
+}
+
+.search-field {
+    width: 300px;
+}
+
+/* Carte de post : Style de chaque carte */
+.modern-post-card {
+    width: 100%; /* Prend toute la largeur disponible */
+    max-width: 750px; /* Limite la taille des cartes */
+    background-color: #fefefe; /* Couleur de fond blanche */
+    border-radius: 15px; /* Arrondi des bords */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Ombre portée pour un effet moderne */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide */
+    overflow: visible; /* Cache le débordement du contenu */
+}
+
+/* Effet au survol des cartes */
+.modern-post-card:hover {
+    transform: translateY(-5px); /* Légère élévation de la carte */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+}
+
+/* Header de la carte */
+.modern-post-header {
+    display: flex; /* Aligne les éléments en ligne */
+    align-items: center; /* Centre les éléments verticalement */
+    padding: 20px; /* Espacement intérieur */
+    background-color: #eaeaea; /* Couleur de fond grise */
+}
+
+/* Avatar dans le header */
+.modern-avatar {
+    background-size: cover; /* Ajuste l'image pour couvrir entièrement */
+    border-radius: 50%; /* Rend l'avatar circulaire */
+    width: 60px; /* Largeur fixe */
+    height: 60px; /* Hauteur fixe */
+}
+
+/* Titre du post */
+.modern-post-title {
+    font-size: 20px; /* Taille du texte */
+    font-weight: bold; /* Rend le texte en gras */
+}
+
+/* Sous-titre */
+.modern-post-subtitle {
+    font-size: 14px; /* Taille plus petite pour le sous-titre */
+}
+
+/* Contenu du post */
+.modern-post-content {
+    padding: 20px; /* Ajoute de l’espace autour du texte */
+}
+
+/* Conteneur de l’image du post */
+.post-image-container {
+    width: 100%; /* Largeur maximale */
+    height: 250px; /* Hauteur fixe */
+    margin-bottom: 15px; /* Espacement en bas */
+}
+
+/* Image dans le post */
+.modern-post-img {
+    width: 100%; /* Ajuste la largeur */
+    height: 100%; /* Ajuste la hauteur */
+    object-fit: cover; /* Garde le bon ratio de l’image */
+    border-radius: 8px; /* Arrondi des coins */
+}
+
+/* Texte du post */
+.modern-post-text {
+    font-size: 16px; /* Taille du texte */
+    color: #000000; /* Couleur légèrement foncée pour une meilleure lisibilité */
+    line-height: 1.6; /* Espacement des lignes */
+    text-align: justify; /* Justifie le texte */
+}
+
+/* Actions de la carte */
+.modern-post-actions {
+    display: flex; /* Affichage en ligne */
+    justify-content: space-between; /* Répartit les éléments */
+    padding: 15px 20px; /* Espacement intérieur */
+    background-color: #f9f9f9; /* Fond légèrement gris */
+}
+
+/* Boutons d’action */
+.action-button {
+    display: flex; /* Aligne le texte et l’icône */
+    align-items: center; /* Centre verticalement */
+    padding: 15px 20px; /* Espacement intérieur */
+    border-radius: 50px; /* Arrondi des boutons */
+    text-transform: none;
+    background-color: #fcfcfc; /* Bleu */
+    color: white; /* /* Pas de transformation du texte */
+}
+
+/* Icône dans le bouton */
+.action-button mat-icon {
+    margin-right: 8px; /* Espacement entre l'icône et le texte */
+}
+
+/* Effet au survol des boutons d’action */
+.action-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #a10000; /* Fond légèrement plus foncé */
+}
+
+/* Pagination améliorée */
+.pagination-container {
+    display: flex; /* Alignement en ligne */
+    justify-content: center; /* Centre les éléments */
+    align-items: center; /* Alignement vertical */
+    gap: 10px; /* Espacement entre les éléments */
+    margin-top: 30px; /* Espacement avec les posts */
+    padding: 15px; /* Espacement intérieur */
+    background: white; /* Fond blanc */
+    border-radius: 50px; /* Arrondi du conteneur */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    max-width: 400px; /* Taille maximale */
+    margin-left: auto;
+    margin-right: auto; /* Centre horizontalement */
+}
+
+/* Boutons de pagination */
+.pagination-btn {
+    background: linear-gradient(135deg, #f14f4f, #ff0000); /* Dégradé de bleu */
+    color: white; /* Texte en blanc */
+    border: none; /* Pas de bordure */
+    padding: 12px 18px; /* Espacement intérieur */
+    border-radius: 50px; /* Boutons arrondis */
+    font-size: 16px; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    cursor: pointer; /* Curseur interactif */
+    transition: all 0.3s ease; /* Animation fluide */
+    display: flex; /* Alignement */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Ombre */
+}
+
+/* Effet au survol des boutons de pagination */
+.pagination-btn:hover {
+    background: linear-gradient(135deg, #ff0000, #ff2424); /* Dégradé plus foncé */
+    transform: scale(1.1); /* Légère augmentation de taille */
+}
+
+/* Désactivation des boutons de pagination */
+.pagination-btn:disabled {
+    background: #ddd; /* Fond gris */
+    cursor: not-allowed; /* Curseur interdit */
+    box-shadow: none; /* Pas d’ombre */
+    transform: none; /* Pas d’animation */
+}
+
+/* Numéro de page */
+.page-number {
+    font-size: 18px; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    color: #333; /* Couleur du texte */
+    padding: 0 10px; /* Espacement horizontal */
+}
+
+/* Bouton "Create New Post" */
+.create-post-btn {
+    position: fixed; /* Bouton fixe en bas de l’écran */
+    bottom: 20px; /* Position depuis le bas */
+    right:200px; /* Position depuis la droite */
+    background-color: #ff4500; /* Couleur orange foncée */
+    color: rgb(163, 6, 6); /* Texte blanc */
+    padding: 10px 20px; /* Espacement intérieur */
+    border-radius: 30px; /* Bouton arrondi */
+    font-size: 16px; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    box-shadow: 0 5px 10px rgba(255, 4, 4, 0.918); /* Ombre */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Animation fluide */
+}
+
+/* Effet au survol du bouton "Create New Post" */
+.create-post-btn:hover {
+    background-color: #e03e00; /* Couleur plus foncée */
+    transform: scale(1.05); /* Légère augmentation de taille */
+}
+
+  /* Chat Now Button */
+  .chat-now-container {
+    position: fixed;
+    bottom: 20px;
+    left: 200px;
+    z-index: 10;
+  }
+  
+  .chat-now-btn {
+    background-color: #d35400; /* Dark Orange */
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .chat-now-btn:hover {
+    background-color: #e67e22; /* Lighter Orange */
+  }
+
+  button {
+    margin: 1px;
+  }
+  /* Conteneur pour aligner le bouton et l’alerte */
+.summary-container {
+    display: inline-block;
+    position: relative;
+  }
+  
+/* Conteneur pour aligner le bouton et l’alerte */
+.summary-container {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Style moderne pour l’alerte (affichage sur 3 lignes) */
+.summary-alert {
+    background: #FF9800; /* 🟠 Orange vif */
+    color: white;
+    padding: 8px 12px; /* ✅ Espacement réduit */
+    border-radius: 8px; 
+    position: absolute;
+    left: 130%; /* ✅ Décalage à droite du bouton */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px; /* ✅ Texte plus petit */
+    font-weight: bold;
+    max-width: 200px; /* ✅ Largeur limitée pour éviter le débordement */
+    word-wrap: break-word; /* ✅ Coupe les mots longs */
+    white-space: normal; /* ✅ Permet le retour à la ligne */
+    text-align: center; /* ✅ Centre le texte */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Animation d’apparition */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Style du bouton Résumé */
+.summary-button {
+    background-color: #f3f3f3; /* Orange attirant */
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgb(255, 151, 151);
+}
+
+/* Effet au survol */
+.summary-button:hover {
+    background-color: #ffffff; /* Orange plus foncé */
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+

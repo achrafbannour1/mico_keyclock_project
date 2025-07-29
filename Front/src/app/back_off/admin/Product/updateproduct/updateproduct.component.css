@@ -1,0 +1,17 @@
+.card {
+  border-radius: 10px;
+}
+.card-header {
+  border-radius: 10px 10px 0 0;
+}
+.form-control {
+  border-radius: 5px;
+}
+.btn-primary, .btn-secondary {
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+.alert {
+  margin-top: 15px;
+  border-radius: 5px;
+}

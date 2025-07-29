@@ -1,0 +1,90 @@
+<app-navadmin></app-navadmin>
+<main class="main-content">
+  <div class="container-xxl py-5">
+    <div class="container">
+      <h1 class="mb-5 display-5 fw-bold text-primary">Add New Product</h1>
+      <form #productForm="ngForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <label for="designation" class="form-label">Designation</label>
+            <input type="text" class="form-control" id="designation" [(ngModel)]="product.designation" name="designation" required minlength="3" #designation="ngModel">
+            <div class="invalid-feedback" *ngIf="designation.errors?.['required']">
+              Designation is required.
+            </div>
+            <div class="invalid-feedback" *ngIf="designation.errors?.['minlength']">
+              Designation must be at least 3 characters.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="prix" class="form-label">Price ($)</label>
+            <input type="number" step="0.01" class="form-control" id="prix" [(ngModel)]="product.prix" name="prix" required min="0.01" #prix="ngModel">
+            <div class="invalid-feedback" *ngIf="prix.errors?.['required']">
+              Price is required.
+            </div>
+            <div class="invalid-feedback" *ngIf="prix.errors?.['min']">
+              Price must be greater than 0.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="category" class="form-label">Category</label>
+            <input type="text" class="form-control" id="category" [(ngModel)]="product.category" name="category" required minlength="3" pattern="[A-Za-z\s]+" #category="ngModel">
+            <div class="invalid-feedback" *ngIf="category.errors?.['required']">
+              Category is required.
+            </div>
+            <div class="invalid-feedback" *ngIf="category.errors?.['minlength']">
+              Category must be at least 3 characters.
+            </div>
+            <div class="invalid-feedback" *ngIf="category.errors?.['pattern']">
+              Category must contain only letters and spaces.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="marque" class="form-label">Brand</label>
+            <input type="text" class="form-control" id="marque" [(ngModel)]="product.marque" name="marque" required minlength="2" #marque="ngModel">
+            <div class="invalid-feedback" *ngIf="marque.errors?.['required']">
+              Brand is required.
+            </div>
+            <div class="invalid-feedback" *ngIf="marque.errors?.['minlength']">
+              Brand must be at least 2 characters.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="discount" class="form-label">Discount (%)</label>
+            <input type="number" class="form-control" id="discount" [(ngModel)]="product.discount" name="discount" min="0" max="100" #discount="ngModel">
+            <div class="invalid-feedback" *ngIf="discount.errors?.['min'] || discount.errors?.['max']">
+              Discount must be between 0 and 100.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="tauxRemise" class="form-label">Discount Rate (e.g., 0.15 for 15%)</label>
+            <input type="number" step="0.01" class="form-control" id="tauxRemise" [(ngModel)]="product.tauxRemise" name="tauxRemise" min="0" max="1" #tauxRemise="ngModel">
+            <div class="invalid-feedback" *ngIf="tauxRemise.errors?.['min'] || tauxRemise.errors?.['max']">
+              Discount rate must be between 0 and 1.
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="image" class="form-label">Image URL</label>
+            <input type="url" class="form-control" id="image" [(ngModel)]="product.image" name="image" placeholder="https://..." #image="ngModel">
+            <div class="invalid-feedback" *ngIf="image.errors?.['url']">
+              Please enter a valid URL.
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="article" class="form-label">Article</label>
+            <input type="text" class="form-control" id="article" [(ngModel)]="product.article" name="article" minlength="3" #article="ngModel">
+            <div class="invalid-feedback" *ngIf="article.errors?.['minlength']">
+              Article must be at least 3 characters if provided.
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <button type="submit" class="btn btn-primary btn-lg me-2" [disabled]="productForm.invalid">Add Product</button>
+          <button type="button" class="btn btn-secondary btn-lg" (click)="cancel()">Cancel</button>
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+          {{ errorMessage }}
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

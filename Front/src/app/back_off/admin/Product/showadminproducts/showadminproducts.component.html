@@ -1,0 +1,106 @@
+<app-navadmin></app-navadmin>
+<main class="main-content">
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="row g-0 gx-5 align-items-end">
+        <div class="col-lg-6">
+          <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+            <h1 class="mb-3 display-5 fw-bold text-primary">Product Inventory</h1>
+          </div>
+        </div>
+        <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+          <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+            <li class="nav-item me-2" *ngFor="let category of categories">
+              <button class="btn filter-btn"
+                      [class.active]="isActiveCategory(category)"
+                      (click)="filterByCategory(category)">
+                <i class="fa fa-tag me-2"></i>{{ category }}
+              </button>
+            </li>
+          </ul>
+          <div class="d-flex justify-content-end gap-2">
+            <a class="btn btn-success btn-lg" [routerLink]="['/admin/addproduct']">
+              <i class="fa fa-plus me-2"></i>Add Product
+            </a>
+            <a class="btn btn-primary btn-lg" [routerLink]="['/admin/post-tweet']">
+              <i class="fa fa-paper-plane me-2"></i>Post Tweet
+            </a>
+            <button class="btn btn-info btn-lg" (click)="toggleStatistics()">
+              <i class="fa fa-chart-bar me-2"></i>Show Statistics
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics Section -->
+      <div *ngIf="showStatistics" class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Category Statistics</h5>
+        </div>
+        <div class="card-body">
+          <canvas baseChart
+                  [data]="barChartData"
+                  [options]="barChartOptions"
+                  [type]="'bar'"
+                  height="300">
+          </canvas>
+        </div>
+      </div>
+
+      <div class="tab-content">
+        <div id="tab-1" class="tab-pane fade show p-0 active">
+          <div class="row g-4">
+            <div *ngFor="let product of filteredProducts" class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+              <div class="resource-card">
+                <div class="image-container position-relative">
+                  <img class="img-fluid" [src]="getProductImage(product.image)" [alt]="product.designation">
+                  <div class="status-badge bg-success">
+                    Available
+                  </div>
+                </div>
+
+                <div class="resource-content p-4">
+                  <div class="d-flex align-items-center mb-3">
+                    <img src="assets/images/brand.png" alt="Brand Logo" class="brand-logo">
+                    <h5 class="mb-0">{{ product.marque }}</h5>
+                  </div>
+                  <h6>{{ product.designation }}</h6>
+                  <p class="text-muted">
+                    <i class="fa fa-dollar-sign me-1"></i>Price: {{ product.prix | currency }}
+                  </p>
+                  <p class="text-muted">
+                    <i class="fa fa-tags me-1"></i>Category: {{ product.category }}
+                  </p>
+                  <p class="text-muted">
+                    <i class="fa fa-percent me-1"></i>Discount: {{ product.discount }}% ({{ product.tauxRemise * 100 }}% off)
+                  </p>
+                  <div class="text-center mt-3 d-flex justify-content-center gap-2 flex-wrap">
+                    <a class="btn btn-details" [routerLink]="['/admin/productDetails', product.id]">
+                      <i class="fa fa-info-circle me-2"></i>View Details
+                    </a>
+                    <a class="btn btn-warning" [routerLink]="['/admin/updateproduct', product.id]">
+                      <i class="fa fa-edit me-2"></i>Update
+                    </a>
+                    <button class="btn btn-danger" (click)="deleteProduct(product.id)">
+                      <i class="fa fa-trash me-2"></i>Delete
+                    </button>
+                    <button class="btn btn-primary" (click)="postToBlog(product)">
+                      <i class="fa fa-blog me-2"></i>Post
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+              <a class="btn btn-primary btn-lg px-5 py-3 rounded-pill" href="#">
+                Load More Products
+                <i class="fa fa-arrow-right ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

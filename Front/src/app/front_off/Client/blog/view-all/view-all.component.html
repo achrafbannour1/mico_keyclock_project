@@ -1,0 +1,96 @@
+<app-navcl></app-navcl>
+
+
+
+
+<!-- Bouton Create New Post à droite sous le Navbar -->
+<button mat-raised-button class="create-post-btn" routerLink="/client/blog/create-post">
+  Create Post
+</button>
+
+<!-- Barre de recherche avancée -->
+<div class="search-container">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Rechercher un post</mat-label>
+    <input matInput [(ngModel)]="searchQuery" (input)="filterPosts()" placeholder="Entrez un mot-clé">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
+
+
+
+<div class="card-container">
+    <mat-card class="modern-post-card" *ngFor="let item of filteredPosts | paginate: { itemsPerPage: pageSize, currentPage: page }">
+      <mat-card-header class="modern-post-header">
+        <div mat-card-avatar class="modern-avatar"></div>
+        <mat-card-title class="modern-post-title">{{ item.name }}</mat-card-title>
+        <mat-card-subtitle class="modern-post-subtitle">
+          Par {{ item.postedBy }} | {{ item.date | date: 'medium' }}
+        </mat-card-subtitle>
+      </mat-card-header>
+  
+      <mat-card-content class="modern-post-content">
+        <div class="post-image-container">
+          <img mat-card-image [src]="item.img" class="modern-post-img" alt="Post Image"/>
+        </div>
+        <p class="modern-post-text">
+          {{ item.content.length > 400 ? item.content.substr(0, 400) + '...' : item.content }}
+        </p>
+      </mat-card-content>
+  
+      <mat-card-actions class="modern-post-actions">
+        <button mat-raised-button color="warn" class="action-button">
+          <mat-icon>favorite</mat-icon> {{ item.likeCount }}
+        </button>
+        
+        <button mat-raised-button color="warn" class="action-button" routerLink="/client/blog/view-post/{{ item.id }}">
+          <mat-icon>remove_red_eye</mat-icon>  View 
+        </button>
+        <button mat-raised-button color="warn" class="action-button" [routerLink]="['/client/blog/edit-post', item.id]">
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+        <button mat-raised-button color="warn" class="action-button" (click)="deletePost(item.id)">
+          <mat-icon>delete</mat-icon> Delete
+        </button>
+
+
+
+<!-- Conteneur pour bouton Résumé et l'alerte -->
+<div class="summary-container">
+  <button (click)="generateSummary(item.id)" mat-button class="summary-button">Summary</button>
+
+  <!-- 📜 Alerte Résumé (affichée seulement si showSummary est true) -->
+  <div *ngIf="item.showSummary" class="summary-alert">
+    📢 {{ item.summary }}
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+      </mat-card-actions>
+    </mat-card>
+</div>
+
+
+
+<!-- Pagination améliorée -->
+<div class="pagination-container">
+  <button (click)="previousPage()" [disabled]="page <= 1" class="pagination-btn">
+    Précédent
+  </button>
+  
+  <span class="page-number">Page {{ page }} / {{ totalPages }}</span>
+  
+  <button (click)="nextPage()" [disabled]="page >= totalPages" class="pagination-btn">
+    Suivant
+  </button>
+</div>
+
+ 

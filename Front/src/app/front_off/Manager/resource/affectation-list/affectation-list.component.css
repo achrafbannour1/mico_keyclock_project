@@ -1,0 +1,15 @@
+
+.input-group {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.input-group-text {
+  background-color: #ff6409;
+  color: white;
+}
+
+.form-control {
+  border-radius: 0 4px 4px 0;
+}
+

@@ -1,0 +1,39 @@
+<app-navcl></app-navcl>
+<div class="container mt-4">
+    <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()" class="p-4 bg-light rounded shadow-sm">
+  
+      <h4 class="mb-4 text-primary">Créer une Demande</h4>
+  
+      <!-- Type de Demande -->
+      <div class="mb-3">
+        <label for="typeDemande" class="form-label">Type de Demande</label>
+        <input type="text" id="typeDemande" class="form-control" formControlName="typeDemande" placeholder="Ex: Construction, Rénovation">
+        <div *ngIf="demandeForm.get('typeDemande')?.touched && demandeForm.get('typeDemande')?.invalid" class="text-danger mt-1">
+          <small *ngIf="demandeForm.get('typeDemande')?.errors?.['required']">Ce champ est requis.</small>
+        </div>
+      </div>
+  
+      <!-- Description -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" rows="4" class="form-control" formControlName="description" placeholder="Décrivez votre demande ici..."></textarea>
+        <div *ngIf="demandeForm.get('description')?.touched && demandeForm.get('description')?.invalid" class="text-danger mt-1">
+          <small *ngIf="demandeForm.get('description')?.errors?.['required']">La description est obligatoire.</small>
+        </div>
+      </div>
+  
+      <!-- Date de Demande -->
+      <div class="mb-3">
+        <label for="date_demande" class="form-label">Date de Demande</label>
+        <input type="date" id="date_demande" class="form-control" formControlName="date_demande">
+        <div *ngIf="demandeForm.get('date_demande')?.touched && demandeForm.get('date_demande')?.invalid" class="text-danger mt-1">
+          <small *ngIf="demandeForm.get('date_demande')?.errors?.['required']">Veuillez sélectionner une date.</small>
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary w-100" [disabled]="demandeForm.invalid">
+        Soumettre la Demande
+      </button>
+    </form>
+  </div>
+  

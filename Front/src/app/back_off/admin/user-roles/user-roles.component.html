@@ -1,0 +1,49 @@
+<app-navadmin></app-navadmin>
+<main class="main-content">
+<div class="container mt-5">
+  <h2>Manage Roles for User: {{ user?.username || 'Unknown User' }}</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && user" class="row">
+    <div class="col-12 mb-4">
+      <h3>Current Roles</h3>
+      <ul class="list-group">
+        <li *ngFor="let role of userRoles" class="list-group-item">
+          {{ role }}
+          <button class="btn btn-danger btn-sm float-end" (click)="removeRole(role)">Remove</button>
+        </li>
+        <li *ngIf="userRoles.length === 0" class="list-group-item text-muted">
+          No roles assigned. (Default: CLIENT from localStorage)
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-12">
+      <h3>Add New Role</h3>
+      <select class="form-select mb-3" (change)="onRoleChange($event)">
+        <option value="">Select a role to add...</option>
+        <option *ngFor="let role of availableRoles" [value]="role" [disabled]="userRoles.includes(role)">
+          {{ role }} {{ userRoles.includes(role) ? '(Already Assigned)' : '' }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-12 mt-3">
+      <button class="btn btn-secondary" (click)="backToUserManagement()">Back to User Management</button>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && !user" class="text-center">
+    <p>User not found.</p>
+  </div>
+</div>
+</main>

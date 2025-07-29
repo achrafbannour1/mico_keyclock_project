@@ -1,0 +1,128 @@
+
+/* Improved Main Content Styles */
+.main-content {
+  margin-left: 280px;
+  padding: 40px;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.form-check {
+  margin: 25px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 15px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 260px;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .form-container {
+    padding: 25px;
+  }
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Invalid input: red border */
+.form-group input.ng-invalid.ng-touched,
+.form-group select.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+/* Optional: Change label color to indicate invalid input */
+.form-group input.ng-invalid.ng-touched + label,
+.form-group select.ng-invalid.ng-touched + label {
+  color: red;
+}
+
+/* Add these styles */
+.success-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 500px;
+  border-radius: 4px;
+  border: 1px solid #c3e6cb;
+}
+
+
+.error-notification {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 500px;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+}
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 4px;
+  display: block;
+}

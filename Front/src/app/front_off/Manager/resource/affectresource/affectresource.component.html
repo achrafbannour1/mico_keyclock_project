@@ -1,0 +1,47 @@
+<app-nav-manager></app-nav-manager>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">{{ isMachine ? 'Affect Heavy Equipment to Project' : '' }}</h2>
+
+  <div class="card shadow-lg rounded p-4">
+    <div *ngIf="errorMessage" class="alert alert-danger text-center">{{ errorMessage }}</div>
+
+    <!-- Machine Form -->
+    <form *ngIf="isMachine" [formGroup]="machineForm" (ngSubmit)="submitMachineAffectation()">
+      <div class="mb-3">
+        <label for="projectId" class="form-label">Select Project</label>
+        <select id="projectId" class="form-control" formControlName="projectId" required>
+          <option value="" disabled>Select a project</option>
+          <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+        </select>
+        <div *ngIf="machineForm.controls['projectId'].touched && machineForm.controls['projectId'].invalid" class="text-danger">
+          Please select a project.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="startDate" class="form-label">Start Date</label>
+        <input type="date" id="startDate" class="form-control" formControlName="startDate" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="endDate" class="form-label">End Date</label>
+        <input type="date" id="endDate" class="form-control" formControlName="endDate" required>
+        <div *ngIf="machineForm.controls['endDate'].touched && machineForm.controls['endDate'].invalid" class="text-danger">
+          End date is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="workHours" class="form-label">Work Hours</label>
+        <input type="number" id="workHours" class="form-control" formControlName="workHours" required>
+        <div *ngIf="machineForm.controls['workHours'].touched && machineForm.controls['workHours'].invalid" class="text-danger">
+          Work hours must be greater than 0.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="machineForm.invalid">
+        Assign to Project
+      </button>
+    </form>
+  </div>
+</div>

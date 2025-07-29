@@ -1,0 +1,60 @@
+<app-navcl></app-navcl>
+<mat-card class="center-card">
+  <mat-card-content>
+    <div>
+      <form [formGroup]="postForm">
+        <!-- Name Field -->
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+        <p class="error-message" *ngIf="postForm.get('name')?.touched && postForm.get('name')?.errors?.['required']">
+          Name is required!
+        </p>
+        <p class="error-message" *ngIf="postForm.get('name')?.touched && postForm.get('name')?.errors?.['minlength']">
+          Name must be at least 3 characters long.
+        </p>
+
+        <!-- Img Field -->
+        <mat-form-field appearance="fill">
+          <mat-label>Img</mat-label>
+          <input matInput formControlName="img">
+        </mat-form-field>
+        <p class="error-message" *ngIf="postForm.get('img')?.touched && postForm.get('img')?.errors?.['required']">
+          Image URL is required!
+        </p>
+
+        <!-- Content Field -->
+        <mat-form-field appearance="fill">
+          <mat-label>Content</mat-label>
+          <textarea matInput rows="5" formControlName="content"></textarea>
+        </mat-form-field>
+        <p class="error-message" *ngIf="postForm.get('content')?.touched && postForm.get('content')?.errors?.['required']">
+          Content is required!
+        </p>
+        <p class="error-message" *ngIf="postForm.get('content')?.touched && postForm.get('content')?.errors?.['maxlength']">
+          Content cannot exceed 5000 characters.
+        </p>
+
+        <!-- Tags Field -->
+        <mat-form-field appearance="fill">
+          <mat-label>Tags</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Enter tags">
+            <mat-chip-row *ngFor="let tag of tags" (removed)="remove(tag)">
+              {{ tag }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+            <input placeholder="New Tag ..." [matChipInputFor]="chipGrid" (matChipInputTokenEnd)="add($event)" />
+          </mat-chip-grid>
+        </mat-form-field>
+
+        <!-- Submit Button -->
+        <button mat-raised-button color="warn" style="float:right;" [disabled]="!postForm.valid" (click)="createPost()">
+          Create New Post
+        </button>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,122 @@
+<app-navadmin></app-navadmin>
+<main class="main-content">
+ 
+  <div class="container">
+    <!-- Header Section -->
+    <section class="header-section">
+      <h2>Payments for Financial #{{ financialId }}</h2>
+      <button class="btn btn-back" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> Back to Financials
+      </button>
+    </section>
+<!-- Ajout après la table ou dans une section dédiée -->
+<div class="total-section">
+  <h3>Total payments "COMPLETED" : {{ totalCompletedPayments | currency:'EUR' }}</h3>
+  <h3>Total payments "PENDING" : <span>{{ totalPendingPayments | currency:'EUR' }}</span></h3>
+</div>
+    <div class="filter-container">
+      <label for="statusFilter">Filter by Status:</label>
+      <select id="statusFilter" [(ngModel)]="selectedStatus" class="filter-select">
+        <option value="ALL">All</option>
+        <option value="COMPLETED">Completed</option>
+        <option value="PENDING">Pending</option>
+      </select>
+    </div>
+    
+    <!-- Payments Table Section -->
+    <section class="table-section">
+      <div class="table-container" *ngIf="payments.length > 0">
+        <table class="financial-table">
+          <thead>
+          <tr>
+            <th>Ref</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Method</th>
+            <th>Late</th>
+            <th>Late Interest</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let payment of getFilteredPayments()">
+            <td>{{ payment.id }}</td>
+            <td>{{ payment.paymentAmount | currency:'EUR' }}</td>
+            <td>{{ payment.paymentDate }}</td>
+            <td>{{ payment.paymentStatus }}</td>
+            <td>{{ payment.paymentMethod }}</td>
+            <td>{{ payment.isLate ? 'Yes' : 'No' }}</td>
+            <td>{{ payment.lateInterest || 0 | currency:'EUR' }}</td>
+            <td class="action-buttons">
+              <button class="btn btn-warning" (click)="editPayment(payment)">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="btn btn-danger" (click)="deletePayment(payment.id)">
+                <i class="fas fa-trash"></i> Delete
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="no-data" *ngIf="payments.length === 0">No payments found for this financial.</p>
+    </section>
+
+    <!-- Edit Payment Form Section -->
+    <section class="form-section" *ngIf="selectedPaymentToEdit">
+      <div class="edit-form">
+        <h3>Edit Payment #{{ selectedPaymentToEdit.id }}</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="editPaymentAmount">Amount</label>
+            <input
+              type="number"
+              id="editPaymentAmount"
+              [(ngModel)]="selectedPaymentToEdit.paymentAmount"
+              class="form-control"
+              placeholder="Enter amount"
+            />
+          </div>
+          <div class="form-group">
+            <label for="editPaymentDate">Payment Date</label>
+            <input
+              type="date"
+              id="editPaymentDate"
+              [(ngModel)]="selectedPaymentToEdit.paymentDate"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="editPaymentStatus">Status</label>
+            <select
+              id="editPaymentStatus"
+              [(ngModel)]="selectedPaymentToEdit.paymentStatus"
+              class="form-control"
+            >
+              <option *ngFor="let status of paymentStatuses" [value]="status">{{ status }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="editPaymentMethod">Method</label>
+            <select
+              id="editPaymentMethod"
+              [(ngModel)]="selectedPaymentToEdit.paymentMethod"
+              class="form-control"
+            >
+              <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-success" (click)="updatePayment()">
+            <i class="fas fa-save"></i> Update
+          </button>
+          <button class="btn btn-danger" (click)="cancelEditPayment()">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>

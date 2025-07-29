@@ -1,0 +1,32 @@
+<!-- Side Navigation -->
+<aside class="sidebar">
+  <!-- Company Logo -->
+  <div class="company-logo">
+    <img src="assets/images/tb.jpg" alt="Company Logo" class="logo-img">
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav class="sidebar-nav">
+    <ul>
+      <li><a [routerLink]="['/admin/user-management']"><i class="fa fa-users"></i>Users</a></li>
+
+
+      <li><a [routerLink]="['/admin/products']"><i class="fa fa-shopping-cart"></i>Products</a></li>
+
+
+      <li><a [routerLink]="['/admin/demandeadmin']"><i class="fa fa-file-text"></i>Demand</a></li>
+      <li><a [routerLink]="['/admin/blog']"><i class="fa fa-rss"></i>Blog</a></li>
+      <li><a [routerLink]="['/admin/historyOrder']"><i class="fa fa-rss"></i>Order history</a></li>
+    </ul>
+  </nav>
+
+  <!-- Bottom Buttons -->
+  <div class="sidebar-bottom">
+    <button class="inquire-btn btn-edit-profile" (click)="openAccountManagement()">
+      <i class="fa fa-user-edit me-2"></i> Edit Profile
+    </button>
+    <button class="inquire-btn btn-logout" (click)="logout($event)">
+      <i class="fa fa-sign-out-alt me-2"></i> Logout
+    </button>
+  </div>
+</aside>

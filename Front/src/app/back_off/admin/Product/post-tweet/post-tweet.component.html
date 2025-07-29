@@ -1,0 +1,26 @@
+<app-navadmin></app-navadmin>
+<main class="main-content">
+  <div class="container py-5">
+    <h2 class="mb-4 text-primary">Post a Tweet</h2>
+    <form [formGroup]="tweetForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="tweetContent" class="form-label">Tweet Content</label>
+        <textarea class="form-control" id="tweetContent" formControlName="content" rows="3" maxlength="280" placeholder="Enter your tweet (max 280 characters)"></textarea>
+        <div *ngIf="tweetForm.get('content')?.invalid && tweetForm.get('content')?.touched" class="text-danger">
+          Tweet content is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="imageUrl" class="form-label">Image URL (Optional)</label>
+        <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl" placeholder="Enter image URL (e.g., https://example.com/image.jpg)">
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="tweetForm.invalid || isSubmitting">
+        {{ isSubmitting ? 'Posting...' : 'Post Tweet' }}
+      </button>
+      <a class="btn btn-secondary ms-2" [routerLink]="['/admin/products']">Cancel</a>
+    </form>
+    <div *ngIf="tweetResponse" class="mt-3 alert" [ngClass]="{'alert-success': tweetSuccess, 'alert-danger': !tweetSuccess}">
+      {{ tweetResponse }}
+    </div>
+  </div>
+</main>

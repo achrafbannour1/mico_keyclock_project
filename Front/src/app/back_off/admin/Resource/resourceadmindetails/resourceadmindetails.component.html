@@ -1,0 +1,99 @@
+<app-navadmin></app-navadmin>
+<main class="main-content">
+  <div class="container">
+    <div *ngIf="resource" class="card">
+      <img
+        [src]="resourceService.getBrandImage(resource.brande)"
+        alt="Resource Image"
+        class="img-fluid"
+      />
+      <div class="card-body">
+        <h2>{{ resource.brande }}</h2>
+        <hr />
+        <p *ngIf="resource.rtype === 'MACHINE'"><strong>Plate Number:</strong> {{ resource.plateNumber }}</p>
+        <p><strong>Type:</strong> {{ resource.rtype }}</p>
+        <p><strong>Price:</strong> {{ resource.price | currency }}</p>
+        <p *ngIf="resource.rtype !== 'MACHINE'"><strong>Quantity:</strong> {{ resource.quantity }}</p>
+        <p *ngIf="resource.rtype === 'MACHINE'"><strong>Months Pay:</strong> {{ resource.monthsPay }}</p>
+        <p *ngIf="resource.rtype === 'MACHINE'"><strong>Work Hours:</strong> {{ resource.nbWorkHours }}</p>
+        <p>
+          <strong>Status:</strong>
+          <span [ngClass]="{ 'text-success fw-bold': resource.status, 'text-danger fw-bold': !resource.status }">
+            {{ resource.status ? 'Available' : 'Not Available' }}
+          </span>
+        </p>
+
+        <div class="d-flex justify-content-between mt-4">
+          <button class="btn btn-primary" (click)="openUpdateForm()">
+            <i class="fa fa-edit me-2"></i> Update
+          </button>
+          <button class="btn btn-danger" (click)="deleteResource()">
+            <i class="fa fa-trash me-2"></i> Delete
+          </button>
+        </div>
+
+        <div *ngIf="showUpdateForm" class="mt-4">
+          <h3>Update Resource</h3>
+
+          <!-- Machine Form -->
+          <form *ngIf="resource.rtype === 'MACHINE'" [formGroup]="machineForm" (ngSubmit)="updateResource()">
+            <div class="mb-3">
+              <label class="form-label">Plate Number</label>
+              <input type="text" class="form-control" formControlName="plateNumber" />
+              <div *ngIf="machineForm.controls['plateNumber'].invalid && machineForm.controls['plateNumber'].touched" class="text-danger">
+                Plate Number is required.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Price</label>
+              <input type="number" class="form-control" formControlName="price" />
+              <div *ngIf="machineForm.controls['price'].invalid && machineForm.controls['price'].touched" class="text-danger">
+                Price must be a positive number.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Months Pay</label>
+              <input type="number" class="form-control" formControlName="monthsPay" />
+              <div *ngIf="machineForm.controls['monthsPay'].invalid && machineForm.controls['monthsPay'].touched" class="text-danger">
+                Months Pay must be a positive number.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Work Hours</label>
+              <input type="number" class="form-control" formControlName="nbWorkHours" />
+              <div *ngIf="machineForm.controls['nbWorkHours'].invalid && machineForm.controls['nbWorkHours'].touched" class="text-danger">
+                Work Hours must be a positive number.
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-success">Save Changes</button>
+              <button type="button" class="btn btn-secondary" (click)="cancelUpdate()">Cancel</button>
+            </div>
+          </form>
+
+          <!-- Tool/Material Form -->
+          <form *ngIf="resource.rtype === 'TOOL' || resource.rtype === 'MATERIALS'" [formGroup]="toolMaterialForm" (ngSubmit)="updateResource()">
+            <div class="mb-3">
+              <label class="form-label">Price</label>
+              <input type="number" class="form-control" formControlName="price" />
+              <div *ngIf="toolMaterialForm.controls['price'].invalid && toolMaterialForm.controls['price'].touched" class="text-danger">
+                Price must be a positive number.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Quantity</label>
+              <input type="number" class="form-control" formControlName="quantity" />
+              <div *ngIf="toolMaterialForm.controls['quantity'].invalid && toolMaterialForm.controls['quantity'].touched" class="text-danger">
+                Quantity must be a positive number.
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-success">Save Changes</button>
+              <button type="button" class="btn btn-secondary" (click)="cancelUpdate()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

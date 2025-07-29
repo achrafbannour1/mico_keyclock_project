@@ -1,0 +1,72 @@
+<app-navcl></app-navcl>
+<main>
+  <div class="container">
+    <section class="header-section">
+      <h2>Payments for {{ projectName }} (Ref: {{ projectId }})</h2>
+      <button class="btn btn-back" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> Back to Projects
+      </button>
+      
+    </section>
+    <div class="total-section">
+      <h3>Total payments "COMPLETED" : <span>{{ totalCompletedPayments | currency:'EUR' }}</span></h3>
+      <h3>Total payments "PENDING" : <span>{{ totalPendingPayments | currency:'EUR' }}</span></h3>
+    </div>
+    <div class="filter-container">
+      <label for="statusFilter">Filter by Status:</label>
+      <select id="statusFilter" [(ngModel)]="selectedStatus">
+        <option value="ALL">All</option>
+        <option value="COMPLETED">Completed</option>
+        <option value="PENDING">Pending</option>
+      </select>
+    </div>
+    
+    <section class="payments-section">
+      <div class="table-container" *ngIf="payments.length > 0">
+        <table class="payments-table">
+          <thead>
+          <tr>
+            <th>Payment Ref</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Method</th>
+            <th>Financial Ref</th>
+            <th>Late?</th>        
+            <th>Late Interest</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let payment of getFilteredPayments()">
+            <td>{{ payment.id }}</td>
+            <td>{{ payment.paymentAmount | currency:'EUR' }}</td>
+            <td>{{ payment.paymentDate | date:'dd/MM/yyyy' }}</td>
+            <td>{{ payment.paymentStatus }}</td>
+            <td>{{ payment.paymentMethod }}</td>
+            <td>{{ payment.financial?.id || 'N/A' }}</td>
+            <td>{{ (payment.isLate === true || payment.isLate === 1) ? 'Yes' : 'No' }}</td>
+            <td>{{ payment.lateInterest ? (payment.lateInterest | currency:'EUR') : '0.00 EUR' }}</td>
+              
+            <td>
+              <button
+                *ngIf="payment.paymentStatus !== 'COMPLETED'"
+                class="btn btn-pay"
+                (click)="pay(payment.id)"
+              >
+                Pay
+              </button>
+              
+                <button (click)="convertCurrency(payment.paymentAmount, 'USD')" class="btn btn-convert"> USD</button>
+                <button (click)="convertCurrency(payment.paymentAmount, 'TND')" class="btn btn-convert">TND</button>
+              
+              
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="no-data" *ngIf="payments.length === 0">No payments found for this project.</p>
+    </section>
+  </div>
+</main>

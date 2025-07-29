@@ -1,0 +1,54 @@
+<app-navadmin></app-navadmin>
+<main class="main-content">
+  <div class="container">
+    <section class="resources-section">
+      <h2>Resources for Project: {{ projectName }}</h2>
+      <div class="table-container">
+        <div *ngIf="isLoading" class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <table *ngIf="!isLoading" class="table table-striped">
+          <thead>
+          <tr>
+            <th>Image</th>
+            <th>Resource Brand</th>
+            <th>Type</th>
+            <th>Quantity</th>
+            <th>Price per Unit</th>
+            <th>Total Hours of Work (Machines Only)</th>
+            <th>Price per Hour (Machines Only)</th>
+            <th>Subtotal</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let resource of projectResources">
+            <td>
+              <img [src]="resource.imageUrl ?? defaultImage" alt="{{ resource.resourceBrand }}" class="resource-image" (error)="handleImageError($event)">
+            </td>
+            <td>{{ resource.resourceBrand }} {{ resource.rtype ? '' : '(Resource Not Found)' }}</td>
+            <td>{{ resource.rtype ?? 'Unknown' }}</td>
+            <td>{{ resource.quantity }}</td>
+            <td>{{ resource.pricePerUnit | currency }}</td>
+            <td>{{ isMachine(resource) ? (resource.workHours > 0 ? resource.workHours : 'N/A') : '-' }}</td>
+            <td>{{ isMachine(resource) ? (resource.pricePerHour > 0 ? (resource.pricePerHour | currency) : 'Unknown Rate') : '-' }}</td>
+            <td>{{ resource.subtotal | currency }}</td>
+          </tr>
+          <tr *ngIf="projectResources.length === 0">
+            <td colspan="8" class="text-center">No resources assigned to this project.</td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <th colspan="7" class="text-end">Total Price:</th>
+            <th>{{ totalPrice | currency }}</th>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+      <button class="btn btn-secondary" (click)="goBack()">Back to Financials</button>
+      <button class="btn btn-primary" (click)="exportToExcel()" style="margin-left: 10px;">Export to Excel</button>
+    </section>
+  </div>
+</main>

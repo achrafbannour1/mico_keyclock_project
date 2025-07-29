@@ -1,0 +1,11 @@
+Model Information:
+* title:	Caterpillar D9R Armored Dozer - Eat3D
+* source:	https://sketchfab.com/3d-models/caterpillar-d9r-armored-dozer-eat3d-10e956e61d174153ada4d19410039358
+* author:	l.corijn (https://sketchfab.com/l.corijn)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Caterpillar D9R Armored Dozer - Eat3D" (https://sketchfab.com/3d-models/caterpillar-d9r-armored-dozer-eat3d-10e956e61d174153ada4d19410039358) by l.corijn (https://sketchfab.com/l.corijn) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

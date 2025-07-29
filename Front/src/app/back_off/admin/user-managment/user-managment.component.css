@@ -1,0 +1,120 @@
+.main-content {
+  margin-left: 280px;
+  padding: 40px;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.card {
+  border-radius: 15px;
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th {
+  font-weight: 600;
+  padding: 15px;
+}
+
+.table td {
+  vertical-align: middle;
+  padding: 15px;
+}
+
+.table-hover tbody tr:hover {
+  background: #e9ecef;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.btn-sm:hover {
+  transform: translateY(-2px);
+}
+
+.btn-custom-orange {
+  background: #ff6409;
+  border: none;
+  color: white;
+}
+
+.btn-custom-orange:hover {
+  background: #e65b00;
+  color: white;
+}
+
+.btn-danger {
+  background: #e74c3c;
+  border: none;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #c0392b;
+  color: white;
+}
+
+.btn-success {
+  background: #2ecc71;
+  border: none;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #27ae60;
+  color: white;
+}
+
+.btn-custom-blue {
+  background: #3498db;
+  border: none;
+  color: white;
+}
+
+.btn-custom-blue:hover {
+  background: #2980b9;
+  color: white;
+}
+
+.btn-lg {
+  padding: 10px 25px;
+  font-size: 1.2rem;
+  border-radius: 25px;
+}
+
+.badge {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 20px;
+}
+
+.bg-success {
+  background: #2ecc71 !important;
+}
+
+.bg-danger {
+  background: #e74c3c !important;
+}
+
+.text-muted {
+  font-size: 1.2rem;
+}

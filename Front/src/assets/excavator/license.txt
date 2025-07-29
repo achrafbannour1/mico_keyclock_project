@@ -1,0 +1,11 @@
+Model Information:
+* title:	Excavator (CAT)
+* source:	https://sketchfab.com/3d-models/excavator-cat-5f195244108c46e495a1e78040f02f7e
+* author:	sarvesh12 (https://sketchfab.com/sarvesh903)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Excavator (CAT)" (https://sketchfab.com/3d-models/excavator-cat-5f195244108c46e495a1e78040f02f7e) by sarvesh12 (https://sketchfab.com/sarvesh903) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

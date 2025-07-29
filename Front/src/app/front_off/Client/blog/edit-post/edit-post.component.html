@@ -1,0 +1,30 @@
+<app-navcl>
+
+</app-navcl>
+<form [formGroup]="editForm" (ngSubmit)="updatePost()">
+    <mat-form-field class="full-width">
+      <mat-label>Titre</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Contenu</mat-label>
+      <textarea matInput formControlName="content"></textarea>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Auteur</mat-label>
+      <input matInput formControlName="postedBy">
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Image URL</mat-label>
+      <input matInput formControlName="img">
+    </mat-form-field>
+  
+<button mat-raised-button style="background-color: #e03e00; color: white;" type="submit">
+    Update Post
+</button>
+    <button mat-button color="warn" (click)="router.navigate(['/client/blog/view-all'])">Cancel</button>
+  </form>
+  

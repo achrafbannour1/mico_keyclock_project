@@ -1,0 +1,42 @@
+<app-navadmin></app-navadmin>
+
+<div class="post-detail-container" *ngIf="post">
+  <!-- Affichage du post -->
+  <mat-card class="post-card">
+    <mat-card-header>
+      <div mat-card-avatar class="profile-picture"></div>
+      <mat-card-title>{{ post.name }}</mat-card-title>
+      <mat-card-subtitle>
+        Posté par: {{ post.postedBy }} | {{ post.date | date: 'medium' }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- Image du post -->
+    <img 
+      mat-card-image 
+      [src]="post.img ? post.img : 'assets/default-image.jpg'" 
+      class="post-img" 
+      alt="Image du post" 
+    />
+
+    <!-- Contenu du post -->
+    <mat-card-content>
+      <p class="post-content">{{ post.content }}</p>
+    </mat-card-content>
+
+    <!-- Tags -->
+    <mat-chip-set *ngIf="post.tags?.length">
+      <mat-chip *ngFor="let tag of post.tags" class="tag-chip">{{ tag }}</mat-chip>
+    </mat-chip-set>
+
+    <!-- Retour -->
+    <mat-card-actions>
+      <button mat-button routerLink="/admin/blog" class="back-button">Retour</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<!-- Message de chargement si les données ne sont pas encore disponibles -->
+<div *ngIf="!post">
+  <p>Chargement du post...</p>
+</div>

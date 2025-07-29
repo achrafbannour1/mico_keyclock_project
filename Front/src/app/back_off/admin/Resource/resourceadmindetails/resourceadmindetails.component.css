@@ -1,0 +1,214 @@
+/* Main Content */
+.main-content {
+  margin-left: 280px; /* Offset for fixed sidebar */
+  padding: 40px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.card-body h2 {
+  color: #ff6409; /* Changed from blue to orange */
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card-body hr {
+  border: 0;
+  height: 1px;
+  background: #e9ecef;
+  margin: 15px 0;
+}
+
+.card-body p {
+  margin: 8px 0;
+  color: #2c3e50;
+  font-size: 1rem;
+}
+
+.card-body p strong {
+  color: #495057;
+}
+
+/* Button Styles */
+.btn-update {
+  padding: 12px 20px;
+  background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%); /* Green for Update */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 200px;
+}
+
+.btn-update:hover {
+  background: linear-gradient(90deg, #27ae60 0%, #219653 100%); /* Darker green */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-danger {
+  padding: 12px 20px;
+  background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%); /* Red for Delete */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 200px;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(90deg, #c0392b 0%, #992d22 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-success {
+  padding: 12px 20px;
+  background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%); /* Green for Save Changes */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 200px;
+}
+
+.btn-success:hover {
+  background: linear-gradient(90deg, #27ae60 0%, #219653 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+  padding: 12px 20px;
+  background: linear-gradient(90deg, #6c757d 0%, #5a6268 100%); /* Gray for Cancel */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 200px;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(90deg, #5a6268 0%, #495057 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.form-label {
+  color: #2c3e50;
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+  text-align: left;
+}
+
+.form-control {
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  padding: 10px;
+  font-size: 1rem;
+  width: 100%;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #ff6409; /* Changed from blue to orange */
+  box-shadow: 0 0 5px rgba(255, 100, 9, 0.3);
+  outline: none;
+}
+
+.text-danger {
+  font-size: 0.85rem;
+  margin-top: 5px;
+  color: #e74c3c;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.update-form {
+  margin-top: 20px;
+}
+
+.update-form h3 {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}

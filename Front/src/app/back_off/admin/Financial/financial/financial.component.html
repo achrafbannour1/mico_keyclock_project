@@ -1,0 +1,65 @@
+<app-navadmin></app-navadmin>
+<main class="main-content">
+  <div class="container">
+    <div class="search-container">
+      <input
+        type="text"
+        placeholder="find a project..."
+        [(ngModel)]="searchQuery"
+      />
+    </div>
+
+    <!-- Project Cards Section -->
+    <section class="projects-section">
+      <h2>Projects with Financials</h2>
+      <div class="project-cards">
+        <div *ngFor="let project of getFilteredProjects()" class="project-card">
+          <img [src]="project.image" alt="{{ project.name }}" class="project-image" (error)="handleImageError($event)">
+          <div class="project-overlay"></div>
+          <div class="project-info">
+            <h3>{{ project.name }}</h3>
+            <div class="button-group">
+              <button class="btn btn-primary" (click)="navigateToProjectFinancials(project.id); $event.stopPropagation()">
+                View Financials
+              </button>
+              <button class="btn btn-info" (click)="navigateToProjectResources(project.name); $event.stopPropagation()">
+                View Resources
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add Financial Form Section -->
+    <section class="form-section">
+      <h2>Add Financial</h2>
+      <form class="add-financial-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="projectId">Project</label>
+            <select [(ngModel)]="projectId" name="projectId" id="projectId" class="form-control">
+              <option value="0" disabled>Select a project</option>
+              <option *ngFor="let project of allProjects" [value]="project.id">{{ project.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="number" [(ngModel)]="amount" name="amount" id="amount" class="form-control" placeholder="Enter amount">
+        </div>
+          <div class="form-group">
+            <label for="transactionDate">Date</label>
+            <input type="date" [(ngModel)]="transactionDate" name="transactionDate" id="transactionDate" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="financialType">Financial Type</label>
+            <select [(ngModel)]="financialType" name="financialType" id="financialType" class="form-control">
+              <option *ngFor="let type of financialTypes" [value]="type">{{ type }}</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-ajouter" type="button" (click)="addFinancial()">Add Financial</button>
+      </form>
+    </section>
+  </div>
+</main>

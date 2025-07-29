@@ -1,0 +1,168 @@
+<app-navadmin></app-navadmin>
+<main class="main-content">
+  <div class="container">
+    <!-- Header Section -->
+    <section class="header-section">
+      <h2>Financials for <span class="project-name">{{ projectName }}</span></h2>
+      <button class="btn btn-back" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> Back to Projects
+      </button>
+    </section>
+
+    <!-- Financials Table Section -->
+    <section class="table-section">
+      <div class="table-container" *ngIf="financials.length > 0">
+        <table class="financial-table">
+          <thead>
+          <tr>
+            <th>Ref</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Financial Type</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let financial of financials" class="financial-row">
+            <td>{{ financial.id }}</td>
+            <td>{{ financial.amount | currency:'EUR' }}</td>
+            <td>{{ financial.transactionDate }}</td>
+            <td>{{ financial.financialType }}</td>
+            <td class="action-buttons">
+              <button class="btn btn-warning" (click)="onEditFinancial(financial)">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="btn btn-danger" (click)="deleteFinancial(financial.id)">
+                <i class="fas fa-trash"></i> Delete
+              </button>
+              <button class="btn btn-info" (click)="showPayments(financial.id)">
+                <i class="fas fa-eye"></i> Show Payments
+              </button>
+              <button class="btn btn-primary" (click)="addPayment(financial)">
+                <i class="fas fa-plus"></i> Add Payment
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="no-data" *ngIf="financials.length === 0">No financials found for this project.</p>
+    </section>
+   <!-- Graphique en Cercle (Pie Chart) -->
+<section class="payment-pie-chart">
+  <h3>Distribution of payments</h3>
+  <div class="chart-container">
+    <canvas #pieChart></canvas> <!-- 🟢 Canvas pour le graphique -->
+  </div>
+</section>
+
+
+
+
+    <!-- Edit Financial Form Section -->
+    <section class="form-section" *ngIf="selectedFinancialToEdit">
+      <div class="edit-form">
+        <h3>Update Financial #{{ selectedFinancialToEdit.id }}</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="editAmount">Amount</label>
+            <input
+              type="number"
+              id="editAmount"
+              [(ngModel)]="selectedFinancialToEdit.amount"
+              class="form-control"
+              placeholder="Enter amount"
+            />
+          </div>
+          <div class="form-group">
+            <label for="editDate">Transaction Date</label>
+            <input
+              type="date"
+              id="editDate"
+              [(ngModel)]="selectedFinancialToEdit.transactionDate"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="editFinancialType">Financial Type</label>
+            <select
+              id="editFinancialType"
+              [(ngModel)]="selectedFinancialToEdit.financialType"
+              class="form-control"
+            >
+              <option *ngFor="let type of financialTypes" [value]="type">{{ type }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-success" (click)="updateFinancial()">
+            <i class="fas fa-save"></i> Update
+          </button>
+          <button class="btn btn-danger" (click)="selectedFinancialToEdit = null">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add Payment Form Section -->
+    <section class="form-section" *ngIf="selectedFinancialForPayment">
+      <div class="edit-form">
+        <h3>Add Payment for Financial #{{ selectedFinancialForPayment.id }}</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="paymentAmount">Amount</label>
+            <input
+              type="number"
+              id="paymentAmount"
+              [(ngModel)]="newPayment.paymentAmount"
+              name="paymentAmount"
+              class="form-control"
+              placeholder="Enter payment amount"
+            />
+          </div>
+          <div class="form-group">
+            <label for="paymentDate">Payment Date</label>
+            <input
+              type="date"
+              id="paymentDate"
+              [(ngModel)]="newPayment.paymentDate"
+              name="paymentDate"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="paymentStatus">Status</label>
+            <select
+              id="paymentStatus"
+              [(ngModel)]="newPayment.paymentStatus"
+              name="paymentStatus"
+              class="form-control"
+            >
+              <option *ngFor="let status of paymentStatuses" [value]="status">{{ status }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="paymentMethod">Method</label>
+            <select
+              id="paymentMethod"
+              [(ngModel)]="newPayment.paymentMethod"
+              name="paymentMethod"
+              class="form-control"
+            >
+              <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-success" (click)="submitPayment()">
+            <i class="fas fa-save"></i> Save Payment
+          </button>
+          <button class="btn btn-danger" (click)="cancelAddPayment()">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
