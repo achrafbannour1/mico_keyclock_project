@@ -1264,13 +1264,9 @@ Each microservice uses a separate MySQL database, defined in `docker-compose.yml
 
 - Connect to the API Gateway (`http://localhost:8030`).
 
-## Part 8: Testing and Deployment
 
-- **Unit Testing**: Write tests for each microservice using JUnit.
-- **Integration Testing**: Test inter-service communication via the API Gateway.
-- **Deployment**: Deploy using Docker containers on a cloud platform like AWS or locally.
 
-## Part 9: Troubleshooting and Best Practices
+## Part 8: Troubleshooting and Best Practices
 
 ### Common Issues
 
